@@ -22,6 +22,9 @@ def SplitSourceByWhiteSpace(source):
     print(allSplits)
     return allSplits
 
+
+#Tokenize() takes in the return value from SplitSourceByWhiteSpace
+#and then iterates over each value to assign an appropriate token
 def Tokenize(source):
     literalNumber = re.compile(r"((\d+(\.\d*)?)|(\.\d+))")
     literalAlpha = re.compile(r"([a-zA-Z]+[a-zA-Z0-9_]*)")
@@ -29,6 +32,7 @@ def Tokenize(source):
     tokenList = []
     token = ""
     for i in range(len(source)):
+        #keywords
         if source[i] == "var":
             token = "VAR"
             tokenList.append(token)

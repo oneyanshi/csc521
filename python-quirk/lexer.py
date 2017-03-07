@@ -69,6 +69,12 @@ def Tokenize(source):
         if source[i] == ")":
             token = "RPAREN"
             tokenList.append(token)
+        if source[i] == "{":
+            token = "LBRACE"
+            tokenList.append(source[i])
+        if source[i] == "}":
+            token = "RBRACE"
+            tokenList.append(source[i])
         if source[i] == ",":
             token = "COMMA"
             tokenList.append(token)

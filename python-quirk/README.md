@@ -1,6 +1,6 @@
 #python-quirk
 
-
+##Grocery List 
 - [ ] heavy lifting for parsing (start soon)
 - [ ] also for interpreter, too
 - [ ] work out bugs for lexer.py ; continue on tho

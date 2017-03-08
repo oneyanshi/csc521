@@ -5,9 +5,9 @@
 - [ ] also for interpreter, too
 - [ ] work out bugs for lexer.py ; continue on tho
 - [ ] update readme.md as you go
-- [ ] rename files if needed
-- [ ] keep only necessary files within repository
-- [ ] add quirk-grammar folder later
+- [x] rename files if needed
+- [x] keep only necessary files within repository
+- [x] add quirk-grammar folder later
 
 ##How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you

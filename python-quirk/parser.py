@@ -89,11 +89,34 @@ def MultipleAssignment(token_index):
         VAR <NameList> ASSIGN <FunctionCall>
     '''
 
+#print statements
 def Print(token_index):
     ''' <Print> ->
         PRINT <Expression>
     '''
 
+#name and parameter lists
+
+def NameList(token_index):
+    '''<NameList> ->
+        <Name> COMMA <NameList>
+        | <Name>
+    '''
+
+def ParameterList(token_index):
+    '''<ParameterList> ->
+        <Parameter> COMMA <ParameterList>
+        | <Parameter>
+
+    '''
+
+def Parameter(token_index):
+    ''' <Parameter> ->
+        <Expression>
+        | <Name>
+    '''
+
+#arithmetic expressions
 def Expression(token_index):
     '''<Expression> ->
         <Term> ADD <Expression>
@@ -294,6 +317,7 @@ def Value(token_index):
     return [False, token_index, []]
 
 
+#literals
 def Name(token_index):
     '''<Name> ->
         IDENT

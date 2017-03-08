@@ -2,24 +2,42 @@ import sys
 import re
 
 #for the lexer
-#defining the numbers and alpha characters will come later
-lexemes = ["var", "function", "return", "print",
+lexemes = []
+
+unvariedLexemes = ["var", "function", "return", "print",
             "=", "+", "-", "*", "/",
             "^", "(", ")", "{",
             "}", ",",":"]
 
-def SplitSourceByWhiteSpace(source):
-    '''Splits the source by white space'''
+def SplitSourceByWhitespace(source):
     allSplits = []
-    for i in range(len(source)):
-        thisSplit = source[i].split()
+    for line in source:
+        thisSplit = line.split()
+        #for line.split():
         allSplits += thisSplit
     #print(allSplits)
     return allSplits
 
 
+def SplitByUnvariedLexemes(source):
+    i=0
+    allSplits = []
+    while i< len(source):
+        line = source[i]
+        unvariedLexemeFound = False;
+        for lexeme in unvariedLexemes:
+            if(-1 != line.find(lexeme)):
+                unvariedLexemeFound = True;
+                split = line.split(lexeme)
+                allSplits += split
+            if not unvariedLexemeFound:
+                allSplits += line
+        i += 1
+    return allSplits
+
+
 def Tokenize(source):
-    '''Tokenize() takes in the return value from SplitSourceByWhiteSpace
+    '''Tokenize() takes in the return value from SplitbyUnvariedLexemes
     and then iterates over each value to assign an appropriate token'''
 
     #compile the regular expressions in order to use them later to
@@ -27,10 +45,10 @@ def Tokenize(source):
     literalNumber = re.compile(r"((\d+(\.\d*)?)|(\.\d+))")
     literalAlpha = re.compile(r"([a-zA-Z]+[a-zA-Z0-9_]*)")
 
-    position = 0 #beginning of the index
+    i = 0 #beginning of the index
     tokenList = []
     token = ""
-    for i in range(len(source)):
+    while i < len(source):
         #keywords
         if source[i] == "var":
             token = "VAR"
@@ -89,16 +107,19 @@ def Tokenize(source):
         if literalNumber.match(source[i]):
             token = ("NUMBER:" + source[i])
             tokenList.append(token)
+            token = ""
         if literalAlpha.match(source[i]) and source[i] not in lexemes:
             token = ("IDENT:" + source[i])
             tokenList.append(token)
-
+            token = ""
+        i += 1
     token = "EOF" #by this point, we should have iterated over the program
     tokenList.append(token)
     #for debugging purposes
     print (tokenList)
     return tokenList
 
+
 if __name__ == '__main__':
-     print ("Starting __main__")
-     Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))
+    print ("starting __main__")
+    Tokenize(SplitByUnvariedLexemes(SplitSourceByWhitespace(sys.stdin.readlines())))

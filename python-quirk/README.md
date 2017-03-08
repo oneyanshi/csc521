@@ -30,6 +30,7 @@ The output for the lexer.py will be a full tokenized version of the program in t
 An example of what lexer.py should be doing:
 
 Input: `var q = 2`
+
 Output: `["VAR", "IDENT:q", "ASSIGN", "NUMBER:2"]`
 
 ##PartialParser.py

@@ -1,5 +1,9 @@
 #python-quirk
 
+>Note to self: PartialParser and PartialInterpreter need to be pushed and fix lexer.py
+>Edit the README.md as you update the PartialParser.py and PartialInterpreter.py
+>When worked on, the names will be changed  
+
 ##How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you
 are able to use Python 2.7+ (it is coded with 3.0 syntax). Within the terminal, you should

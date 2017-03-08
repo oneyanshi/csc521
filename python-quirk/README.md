@@ -1,10 +1,13 @@
 #python-quirk
 
->Note to self: PartialParser and PartialInterpreter need to be pushed and fix lexer.py to account for
-situations where lexemes may be stuck together or binded with another character, e.g. function() has no
-spaces in it and therefore will make it difficult for ya to do anything with it unless you split.
-Edit the README.md as you update the PartialParser.py and PartialInterpreter.py
-When worked on, the names will be changed ...
+
+- [ ] heavy lifting for parsing (start soon)
+- [ ] also for interpreter, too
+- [ ] work out bugs for lexer.py ; continue on tho 
+- [ ] update readme.md as you go
+- [ ] rename files if needed
+- [ ] keep only necessary files within repository
+- [ ] add quirk-grammar folder later
 
 ##How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you
@@ -24,9 +27,6 @@ more to ensure that lexemes are not stuck together. It is then tokenized based u
 
 A `var` would be assigned the `VAR` token, for example. The output for the lexer.py will be a full tokenized
 version of the program in the Quirk file. The output will then be used in the parser discussed below.
-
-- [ ] work out bugs
-* need to be aware of spaces !!! worry about edge cases in the parser
 
 ##PartialParser.py
 

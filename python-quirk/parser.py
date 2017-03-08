@@ -4,20 +4,8 @@ import json
 
 pp = pprint.PrettyPrinter(indent=1, depth=10)
 
-tokens = ["VAR", "IDENT:X", "ASSIGN", "NUMBER:4"]
-tokens = ["SUB", "IDENT:X", "ADD", "NUMBER:4"]
-tokens = ["SUB", "IDENT:X", "EXP", "NUMBER:4", "EOF"]
-tokens = ["SUB", "IDENT:X", "EXP", "NUMBER:4", "EXP", "IDENT:X", "EOF"]
-tokens = ["NUMBER:9", "DIV", "IDENT:X", "EXP",
-          "NUMBER:4", "EXP", "IDENT:X", "EOF"]
-tokens = ["NUMBER:9", "ADD", "IDENT:X", "SUB", "NUMBER:4", "EOF"]
-tokens = ["NUMBER:9", "ADD", "LPAREN", "IDENT:X",
-          "SUB", "NUMBER:4", "RPAREN", "EOF"]
-tokens = ["LPAREN", "IDENT:X", "SUB", "NUMBER:4", "RPAREN", "EOF"]
-tokens = ["IDENT:FOO", "LPAREN", "RPAREN", "EOF"]
-tokens = ["IDENT:FOO", "LPAREN", "RPAREN", "COLON", "NUMBER:0", "EOF"]
-tokens = ["SUB", "IDENT:X", "EOF"]
-tokens = ["PRINT", "NUMBER:4"]
+tokens = ["VAR", "IDENT:x", "ASSIGN", "NUMBER:4", "EOF"]
+#tokens = ["PRINT", "NUMBER:4"]
 
 #begin utilities
 def is_ident(tok):
@@ -41,18 +29,20 @@ def Program(token_index):
         <Statement> <Program>
         | <Statement>
     '''
-    #<Statement><Program>
+    #<Statement> <Program>
     (success, returned_index, returned_subtree) = Statement(token_index)
     if success:
         subtree = ["Program0", returned_subtree]
-        (success, returned_index, returned_subtree) = Program(returned_index + 1)
+        (success, returned_index, returned_subtree) = Program(token_index + 1)
         if success:
             subtree.append(returned_subtree)
             return [True, returned_index, subtree]
+
     #<Statement>
     (success, returned_index, returned_subtree) = Statement(token_index)
     if success:
-        return [True, returned_index, ["Program1", returned_subtree]]
+        subtree = ["Program1", returned_subtree]
+        return [True, returned_index, subtree]
     return [False, token_index, []]
 
 ''' DONE '''
@@ -86,8 +76,7 @@ def FunctionDeclaration(token_index):
     '''
     if "FUNCTION" == tokens[token_index]:
         subtree = ["FunctionDeclaration0", tokens[token_index]]
-        (success, returned_index, returned_subtree) = Name(
-            token_index + 1)
+        (success, returned_index, returned_subtree) = Name(token_index + 1)
         if success:
             subtree.append(returned_subtree)
             if "LPAREN" == tokens[returned_index]:
@@ -152,8 +141,7 @@ def Return(token_index):
     '''
     if "RETURN" == tokens[token_index]:
         subtree = ["Return0", tokens[token_index]]
-        (success,returned_index, returned_subtree) = ParameterList(
-            token_index + 1)
+        (success,returned_index, returned_subtree) = ParameterList(token_index + 1)
         if success:
             subtree.append(returned_subtree)
             return [True, returned_index, subtree]
@@ -170,6 +158,7 @@ def Assignment(token_index):
     (success, returned_index, returned_subtree) = SingleAssignment(token_index)
     if success:
         return [True, returned_index, ["Assignment0", returned_subtree]]
+
     #<Multipleassignment>
     (success, returned_index, returned_subtree) = MultipleAssignment(token_index)
     if success:
@@ -183,8 +172,7 @@ def SingleAssignment(token_index):
     '''
     if "VAR" == tokens[token_index]:
         subtree = ["SingleAssignment0", tokens[token_index]]
-        (success, returned_index, returned_subtree) = Name(
-            token_index + 1)
+        (success, returned_index, returned_subtree) = Name(token_index + 1)
         if success:
             subtree.append(returned_subtree)
             if "ASSIGN" == tokens[returned_index]:
@@ -534,4 +522,4 @@ def Number(token_index):
 
 if __name__ == '__main__':
     print("starting __main__")
-    pp.pprint(Program(0)[2])
+    pp.pprint(Program(0))

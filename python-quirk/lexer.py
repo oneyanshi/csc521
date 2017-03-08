@@ -2,13 +2,7 @@ import sys
 import re
 
 #for the lexer
-
-'''
-prog = re.compile(pattern)
-result = prog.match(string)
-'''
-
-
+#defining the numbers and alpha characters will come later
 lexemes = ["var", "function", "return", "print",
             "=", "+", "-", "*", "/",
             "^", "(", ")", "{",
@@ -19,16 +13,19 @@ def SplitSourceByWhiteSpace(source):
     for i in range(len(source)):
         thisSplit = source[i].split()
         allSplits += thisSplit
-    print(allSplits)
+    #print(allSplits)
     return allSplits
 
 
 #Tokenize() takes in the return value from SplitSourceByWhiteSpace
 #and then iterates over each value to assign an appropriate token
 def Tokenize(source):
+    #compile the regular expressions in order to use them later to
+    #check for matching within the stream of lexemes
     literalNumber = re.compile(r"((\d+(\.\d*)?)|(\.\d+))")
     literalAlpha = re.compile(r"([a-zA-Z]+[a-zA-Z0-9_]*)")
-    position = 0
+
+    position = 0 #beginning of the index
     tokenList = []
     token = ""
     for i in range(len(source)):
@@ -93,9 +90,12 @@ def Tokenize(source):
         if literalAlpha.match(source[i]) and source[i] not in lexemes:
             token = ("IDENT", source[i])
             tokenList.append(token)
+
+
+    #for debugging purposes
     print (tokenList)
     return tokenList
 
 if __name__ == '__main__':
      print ("Starting __main__")
-     SplitSourceByWhiteSpace(sys.stdin.readlines())
+     Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))

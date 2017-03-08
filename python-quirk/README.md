@@ -3,7 +3,7 @@
 
 - [ ] heavy lifting for parsing (start soon)
 - [ ] also for interpreter, too
-- [ ] work out bugs for lexer.py ; continue on tho 
+- [ ] work out bugs for lexer.py ; continue on tho
 - [ ] update readme.md as you go
 - [ ] rename files if needed
 - [ ] keep only necessary files within repository
@@ -25,8 +25,12 @@ on the terminal.
 lexer.py takes in a Quirk file, iterates through it, splits the text by white space before splitting once
 more to ensure that lexemes are not stuck together. It is then tokenized based upon the Quirk tokens.
 
-A `var` would be assigned the `VAR` token, for example. The output for the lexer.py will be a full tokenized
-version of the program in the Quirk file. The output will then be used in the parser discussed below.
+The output for the lexer.py will be a full tokenized version of the program in the Quirk file. The output will then be used in the parser discussed below.
+
+An example of what lexer.py should be doing:
+
+Input: `var q = 2`
+Output: `["VAR", "IDENT:q", "ASSIGN", "NUMBER:2"]`
 
 ##PartialParser.py
 

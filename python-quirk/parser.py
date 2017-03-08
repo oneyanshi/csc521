@@ -39,18 +39,57 @@ def Program(token_index):
             | <Statement>
     '''
 
+    #<Statement> <Program>
+
+
+    #<Statement>
+
+
 def Statement(token_index):
     '''<Statement> ->
             <FunctionDeclaration>
             | <Assignment>
             | <Print>
     '''
+    (success, returned_index, returned_subtree) = Statement(token_index)
+    if success:
+        subtree = ["Statement0", returned_subtree]
+
 
 #function declaration statements
 def FunctionDeclaration(token_index):
     '''<FunctionDeclaration> ->
             FUNCTION <Name> LPAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
     '''
+    (success, returned_index, returned_subtree) = FunctionDeclaration(token_index)
+    if success:
+        subtree = ["FunctionDeclaration0", returned_subtree]
+        if "FUNCTION" == tokens[returned_index]:
+            subtree.append(tokens[returned_index])
+            (success, returned_index, returned_subtree) = Name(
+                returned_index + 1)
+            if success:
+                subtree.append(returned_subtree)
+                if "LPAREN" == tokens[returned_index]:
+                    subtree.append(tokens[returned_index])
+                    (success, returned_index, returned_subtree) = FunctionParams(
+                        returned_index + 1)
+                    if success:
+                        subtree.append(returned_subtree)
+                        if "LBRACE" == tokens[returned_index]:
+                            subtree.append(tokens[returned_index])
+                            (success, returned_index, returned_subtree) = FunctionBody(
+                                returned_index + 1)
+                            if success:
+                                subtree.append(returned_subtree)
+                                if "RBRACE" == tokens[returned_index]:
+                                    subtree.append(tokens[returned_index])
+                                    if success:
+                                        subtree.append(returned_subtree)
+                                        return [True, returned_index, subtree]
+        return [False, token_index, []]
+
+
 def FunctionParams(token_index):
     ''' <NameList> ->
         RPAREN
@@ -94,6 +133,7 @@ def Print(token_index):
     ''' <Print> ->
         PRINT <Expression>
     '''
+
 
 #name and parameter lists
 
@@ -239,7 +279,6 @@ def FunctionCall(token_index):
     # <Name> LPAREN <FunctionCallParams> COLON <Number>
     (success, returned_index, returned_subtree) = Name(token_index)
     if success:
-
         subtree = ["FunctionCall0", returned_subtree]
         if "LPAREN" == tokens[returned_index]:
             subtree.append(tokens[returned_index])

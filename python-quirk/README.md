@@ -20,12 +20,14 @@ on the terminal.
 
 ##lexer.py
 lexer.py takes in a Quirk file, iterates through it, splits the text by white space before splitting once
-more to ensure that lexemes are not stuck together*. It is then tokenized based upon the Quirk tokens.
+more to ensure that lexemes are not stuck together. It is then tokenized based upon the Quirk tokens.
 
 A `var` would be assigned the `VAR` token, for example. The output for the lexer.py will be a full tokenized
 version of the program in the Quirk file. The output will then be used in the parser discussed below.
 
-* still working out the bugs 
+* still working out the bugs
+* works for the most part, though
+* need to be aware of spaces !!! worry about edge cases in the parser
 
 ##PartialParser.py
 

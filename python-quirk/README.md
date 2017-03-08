@@ -23,7 +23,9 @@ lexer.py takes in a Quirk file, iterates through it, splits the text by white sp
 more to ensure that lexemes are not stuck together*. It is then tokenized based upon the Quirk tokens.
 
 A `var` would be assigned the `VAR` token, for example. The output for the lexer.py will be a full tokenized
-version of the program in the Quirk file. The output will then be used in the parser discussed below. 
+version of the program in the Quirk file. The output will then be used in the parser discussed below.
+
+* still working out the bugs 
 
 ##PartialParser.py
 

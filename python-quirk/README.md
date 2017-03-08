@@ -25,7 +25,7 @@ more to ensure that lexemes are not stuck together. It is then tokenized based u
 A `var` would be assigned the `VAR` token, for example. The output for the lexer.py will be a full tokenized
 version of the program in the Quirk file. The output will then be used in the parser discussed below.
 
-[] work out bugs
+- [ ] work out bugs
 * need to be aware of spaces !!! worry about edge cases in the parser
 
 ##PartialParser.py

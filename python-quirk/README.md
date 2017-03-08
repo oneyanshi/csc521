@@ -1,8 +1,10 @@
 #python-quirk
 
->Note to self: PartialParser and PartialInterpreter need to be pushed and fix lexer.py/
+>Note to self: PartialParser and PartialInterpreter need to be pushed and fix lexer.py to account for
+situations where lexemes may be stuck together or binded with another character, e.g. function() has no
+spaces in it and therefore will make it difficult for ya to do anything with it unless you split.
 Edit the README.md as you update the PartialParser.py and PartialInterpreter.py
-When worked on, the names will be changed  
+When worked on, the names will be changed ...
 
 ##How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you
@@ -17,6 +19,11 @@ So if app.q's contents contain only the code `print 4` what should result is the
 on the terminal.
 
 ##lexer.py
+lexer.py takes in a Quirk file, iterates through it, splits the text by white space before splitting once
+more to ensure that lexemes are not stuck together*. It is then tokenized based upon the Quirk tokens.
+
+A `var` would be assigned the `VAR` token, for example. The output for the lexer.py will be a full tokenized
+version of the program in the Quirk file. The output will then be used in the parser discussed below. 
 
 ##PartialParser.py
 

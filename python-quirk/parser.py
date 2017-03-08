@@ -33,6 +33,67 @@ def is_number(tok):
     return -1 < tok.find("NUMBER")
 #end utilities
 
+def Program(token_index):
+    '''<Program> ->
+            <Statement> <Program>
+            | <Statement>
+    '''
+
+def Statement(token_index):
+    '''<Statement> ->
+            <FunctionDeclaration>
+            | <Assignment>
+            | <Print>
+    '''
+
+#function declaration statements
+def FunctionDeclaration(token_index):
+    '''<FunctionDeclaration> ->
+            FUNCTION <Name> LPAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
+    '''
+def FunctionParams(token_index):
+    ''' <NameList> ->
+        RPAREN
+        | RPAREN
+
+    '''
+def FunctionBody(token_index):
+    '''<FunctionBody> ->
+        <Program><Return>
+        | <Return>
+
+    '''
+
+def Return(token_index):
+    '''<Return> ->
+        RETURN <ParameterList>'''
+
+
+#assignment statements
+def Assignment(token_index):
+    ''' <Assignment> ->
+        <SingleAssignment>
+        | <MultipleAssignment>
+
+    '''
+
+
+def SingleAssignment(token_index):
+    ''' <SingleAssignment> ->
+        VAR <Name> ASSIGN <Expression>
+
+    '''
+
+def MultipleAssignment(token_index):
+    ''' <MultipleAssignment> ->
+        VAR <NameList> ASSIGN <FunctionCall>
+    '''
+
+def Print(token_index):
+    ''' <Print> ->
+        PRINT <Expression>
+    '''
+
 def Expression(token_index):
     '''<Expression> ->
         <Term> ADD <Expression>

@@ -1,6 +1,6 @@
 #python-quirk
 
-##Grocery List 
+##Grocery List
 - [ ] heavy lifting for parsing (start soon)
 - [ ] also for interpreter, too
 - [ ] work out bugs for lexer.py ; continue on tho
@@ -33,6 +33,6 @@ Input: `var q = 2`
 
 Output: `["VAR", "IDENT:q", "ASSIGN", "NUMBER:2"]`
 
-##PartialParser.py
+##parser.py
 
-##PartialInterpreter.py
+##interpreter.py

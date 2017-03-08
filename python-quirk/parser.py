@@ -1,5 +1,6 @@
 import sys
 import pprint
+import json
 
 pp = pprint.PrettyPrinter(indent=1, depth=10)
 
@@ -33,130 +34,129 @@ def is_number(tok):
     return -1 < tok.find("NUMBER")
 #end utilities
 
+''' need to get done '''
 def Program(token_index):
     '''<Program> ->
-            <Statement> <Program>
-            | <Statement>
+        <Statement> <Program>
+        | <Statement>
     '''
 
-    #<Statement> <Program>
+    return [False, token_index, []]
 
-
-    #<Statement>
-
-
+''' need to get done '''
 def Statement(token_index):
     '''<Statement> ->
-            <FunctionDeclaration>
-            | <Assignment>
-            | <Print>
+        <FunctionDeclaration>
+        | <Assignment>
+        | <Print>
     '''
-    (success, returned_index, returned_subtree) = Statement(token_index)
-    if success:
-        subtree = ["Statement0", returned_subtree]
+
+    return [False, token_index, []]
 
 
-#function declaration statements
+''' need to get done '''
 def FunctionDeclaration(token_index):
     '''<FunctionDeclaration> ->
-            FUNCTION <Name> LPAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
+        FUNCTION <Name> LPAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
     '''
-    (success, returned_index, returned_subtree) = FunctionDeclaration(token_index)
-    if success:
-        subtree = ["FunctionDeclaration0", returned_subtree]
-        if "FUNCTION" == tokens[returned_index]:
-            subtree.append(tokens[returned_index])
-            (success, returned_index, returned_subtree) = Name(
-                returned_index + 1)
-            if success:
-                subtree.append(returned_subtree)
-                if "LPAREN" == tokens[returned_index]:
-                    subtree.append(tokens[returned_index])
-                    (success, returned_index, returned_subtree) = FunctionParams(
-                        returned_index + 1)
-                    if success:
-                        subtree.append(returned_subtree)
-                        if "LBRACE" == tokens[returned_index]:
-                            subtree.append(tokens[returned_index])
-                            (success, returned_index, returned_subtree) = FunctionBody(
-                                returned_index + 1)
-                            if success:
-                                subtree.append(returned_subtree)
-                                if "RBRACE" == tokens[returned_index]:
-                                    subtree.append(tokens[returned_index])
-                                    if success:
-                                        subtree.append(returned_subtree)
-                                        return [True, returned_index, subtree]
-        return [False, token_index, []]
 
+    return [False, token_index, []]
 
+''' need to get done '''
 def FunctionParams(token_index):
-    ''' <NameList> ->
-        RPAREN
+    '''<FunctionParams> ->
+        <NameList> RPAREN
         | RPAREN
-
     '''
+
+    return [False, token_index, []]
+
+''' need to get done '''
 def FunctionBody(token_index):
     '''<FunctionBody> ->
-        <Program><Return>
+        <Program> <Return>
         | <Return>
-
     '''
 
+    return [False, token_index, []]
+
+''' need to get done '''
 def Return(token_index):
     '''<Return> ->
-        RETURN <ParameterList>'''
+        RETURN <ParameterList>
+    '''
 
+    return [False, token_index, []]
 
-#assignment statements
+''' need to get done '''
 def Assignment(token_index):
-    ''' <Assignment> ->
+    '''<Assignment> ->
         <SingleAssignment>
         | <MultipleAssignment>
 
     '''
 
+    return [False, token_index, []]
 
+''' need to get done '''
 def SingleAssignment(token_index):
-    ''' <SingleAssignment> ->
+    '''<SingleAssignment> ->
         VAR <Name> ASSIGN <Expression>
-
     '''
 
+    return [False, token_index, []]
+
+''' need to get done '''
 def MultipleAssignment(token_index):
-    ''' <MultipleAssignment> ->
+    '''<MultipleAssignment>->
         VAR <NameList> ASSIGN <FunctionCall>
     '''
 
-#print statements
+    return [False, token_index, []]
+
+''' need to get done '''
 def Print(token_index):
     ''' <Print> ->
         PRINT <Expression>
     '''
 
+    return [False, token_index, []]
 
-#name and parameter lists
-
+''' need to get done '''
 def NameList(token_index):
     '''<NameList> ->
         <Name> COMMA <NameList>
         | <Name>
     '''
 
+    return [False, token_index, []]
+
+''' need to get done '''
 def ParameterList(token_index):
     '''<ParameterList> ->
         <Parameter> COMMA <ParameterList>
         | <Parameter>
-
     '''
 
+    return [False, token_index, []]
+
+''' need to get done '''
 def Parameter(token_index):
-    ''' <Parameter> ->
+    '''<Parameter>
         <Expression>
         | <Name>
     '''
+    #<Expression>
+    (success, returned_index, returned_subtree) = Expression(token_index)
+    if success:
+        return [True, returned_index, ["Parameter0", returned_subtree]]
 
-#arithmetic expressions
+    #<Name>
+    (success, returned_index, returned_subtree) = Name(token_index)
+    if success:
+        return [True, returned_index, ["Parameter1", returned_subtree]]
+    return[False, token_index, []]
+
 def Expression(token_index):
     '''<Expression> ->
         <Term> ADD <Expression>
@@ -279,6 +279,7 @@ def FunctionCall(token_index):
     # <Name> LPAREN <FunctionCallParams> COLON <Number>
     (success, returned_index, returned_subtree) = Name(token_index)
     if success:
+
         subtree = ["FunctionCall0", returned_subtree]
         if "LPAREN" == tokens[returned_index]:
             subtree.append(tokens[returned_index])
@@ -308,6 +309,8 @@ def FunctionCall(token_index):
     return [False, token_index, []]
 
 
+
+''' need to get done '''
 def FunctionCallParams(token_index):
     '''
     <FunctionCallParams> ->
@@ -345,18 +348,17 @@ def Value(token_index):
         | <Number>
     '''
     # try in order!
-    #<name>
+    #<Name>
     (success, returned_index, returned_subtree) = Name(token_index)
     if success:
         return [True, returned_index, ["Value0", returned_subtree]]
-    #<number>
+    #<Number>
     (success, returned_index, returned_subtree) = Number(token_index)
     if success:
         return [True, returned_index, ["Value1", returned_subtree]]
     return [False, token_index, []]
 
 
-#literals
 def Name(token_index):
     '''<Name> ->
         IDENT
@@ -400,4 +402,4 @@ def Number(token_index):
 
 if __name__ == '__main__':
     print("starting __main__")
-    pp.pprint(Expression(0))
+    pp.pprint(Program(0)[2])

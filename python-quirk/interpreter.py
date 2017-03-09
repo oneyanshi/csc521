@@ -332,4 +332,4 @@ if __name__ == '__main__':
     #execute the program starting at the top of the tree
     func_by_name(tree[0], tree, scope)
     #Uncomment to see the final scope after the program has executed.
-    #pp.pprint(scope)
+    pp.pprint(scope)

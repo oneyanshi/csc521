@@ -14,6 +14,7 @@ def SplitSourceByWhiteSpace(source):
     for i in range(len(source)):
         thisSplit = source[i].split()
         allSplits += thisSplit
+    #debugging purposes
     #print(allSplits)
     return allSplits
 
@@ -95,10 +96,13 @@ def Tokenize(source):
 
     token = "EOF" #by this point, we should have iterated over the program
     tokenList.append(token)
-    #for debugging purposes
-    print (tokenList)
+
+    #debugging purposes
+    # print (tokenList)
     return tokenList
 
 if __name__ == '__main__':
-     print ("Starting __main__")
-     Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))
+     tokens = Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))
+     for i in range(len(tokens)):
+         sys.stdout.write(str(tokens[i]) + "\n")
+         sys.stdout.flush()

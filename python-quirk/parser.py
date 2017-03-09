@@ -1,16 +1,21 @@
 import sys
 import pprint
 import json
-import lexer
 
-pp = pprint.PrettyPrinter(indent=1, depth=10)
+#for debugging purposes
+#pp = pprint.PrettyPrinter(indent=1, depth=10)
 
-tokens=["FUNCTION", "IDENT:SquareDistance", "LPAREN", "IDENT:x1", "COMMA",
-        "IDENT:y1", "COMMA", "IDENT:x2", "COMMA", "IDENT:y2", "RPAREN",
-        "LBRACE", "RETURN", "IDENT:x1", "EXP", "IDENT:x2", "ADD",
-        "IDENT:y1", "EXP", "IDENT:y2", "RBRACE", "VAR", "IDENT:distance",
-        "ASSIGN", "IDENT:SquareDistance", "LPAREN", "NUMBER:2",
-        "COMMA", "NUMBER:3", "COMMA", "NUMBER:5" "COMMA", "NUMBER:6","RPAREN", "EOF"]
+tokens = []
+for line in sys.stdin.readlines():
+    for token in line.split():
+        tokens.append(token)
+
+# tokens=["FUNCTION", "IDENT:SquareDistance", "LPAREN", "IDENT:x1", "COMMA",
+#         "IDENT:y1", "COMMA", "IDENT:x2", "COMMA", "IDENT:y2", "RPAREN",
+#         "LBRACE", "RETURN", "IDENT:x1", "EXP", "IDENT:x2", "ADD",
+#         "IDENT:y1", "EXP", "IDENT:y2", "RBRACE", "VAR", "IDENT:distance",
+#         "ASSIGN", "IDENT:SquareDistance", "LPAREN", "NUMBER:2",
+#         "COMMA", "NUMBER:3", "COMMA", "NUMBER:5" "COMMA", "NUMBER:6","RPAREN", "EOF"]
 # tokens = ["VAR", "IDENT:Q", "ASSIGN", "NUMBER:9", "ADD", "LPAREN", "IDENT:X",
 #           "SUB", "NUMBER:4", "RPAREN", "EOF"]
 # tokens = ["PRINT", "NUMBER:4", "EOF"]
@@ -525,4 +530,8 @@ def Number(token_index):
 
 if __name__ == '__main__':
     print("starting __main__")
-    pp.pprint(Program(0))
+    aParseTree = Program(0)
+    #debug purposes
+    # pp.pprint(aParseTree)
+    serializedParseTree = json.dumps(aParseTree)
+    aCopyOfTheParseTree = json.loads(serializedParseTree)

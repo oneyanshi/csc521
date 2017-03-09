@@ -37,6 +37,11 @@ Output: `["VAR", "IDENT:q", "ASSIGN", "NUMBER:2"]`
 
 This standard output then becomes the standard input for parser.py.
 
+To solely test lexer.py, type the following in terminal:
+`python lexer.py < app.q`
+
+where `app.q` is the quirk file that you would like to lex.
+
 ##parser.py
 The parser's standard input takes in a stream of tokens from the lexer (I have left within the program test cases/test tokens for debugging purposes). The parser is responsible for building a parser tree via an algorithm that works iteratively. In other words, functions will call on other functions within itself, thus cutting back on work and code. Thanks to Professor Josh McCoy's base, the parser can be relatively easy to understand.
 
@@ -53,4 +58,4 @@ Each function will return a boolean value that is `True` if the subtree correspo
 
 
 ##interpreter.py
-The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output. 
+The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output.

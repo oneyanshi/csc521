@@ -23,7 +23,7 @@ on the terminal.
 
 ## lexer.py
 ### Lexer Grocery List
-- [ ] fix the bugs
+- [ ] fix the bugs; research delimiters 
 
 lexer.py reads in a Quirk file, splits the text by white space before splitting once
 more to ensure that lexemes are not stuck together. It is then tokenized based upon the Quirk tokens and specified rules within the code, i.e. what characters/letters/words are reversed for Quirk, regex, etc.

@@ -23,8 +23,7 @@ on the terminal.
 
 ##lexer.py
 ### Lexer Grocery List
-- [ ] add in functionality / ability to split by lexemes
-- [ ] try at least three test cases
+- [ ] fix the bugs 
 
 lexer.py reads in a Quirk file, splits the text by white space before splitting once
 more to ensure that lexemes are not stuck together. It is then tokenized based upon the Quirk tokens and specified rules within the code, i.e. what characters/letters/words are reversed for Quirk, regex, etc.
@@ -43,7 +42,7 @@ To solely test lexer.py, type the following in terminal:
 where `app.q` is the quirk file that you would like to lex.
 
 ##parser.py
-> Interestingly enough, the parser.py will read in all of the tokens but the program is not fully parsed through if there's a second line? Or even more than one line in the program ... 
+> Interestingly enough, the parser.py will read in all of the tokens but the program is not fully parsed through if there's a second line? Or even more than one line in the program ...
 
 The parser's standard input takes in a stream of tokens from the lexer (I have left within the program test cases/test tokens for debugging purposes). The parser is responsible for building a parser tree via an algorithm that works iteratively. In other words, functions will call on other functions within itself, thus cutting back on work and code. Thanks to Professor Josh McCoy's base, the parser can be relatively easy to understand.
 

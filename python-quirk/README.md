@@ -41,12 +41,14 @@ The Quirk file's contents will be passed into `SplitSourceByWhiteSpace()` first,
 
 As a side note, I realize that there is probably a better way of solving the problem of characters that were stuck together: how do we properly read and parse through a Quirk file if there are no whitespaces? For example:
 
-`function SquareDistance(x1, y1, x2, y2) {
+```
+function SquareDistance(x1, y1, x2, y2) {
   return x1 ^ x2 + y1 ^ y2
   }
-var distance = SquareDistance(2, 3, 5, 6)`
+var distance = SquareDistance(2, 3, 5, 6)
+```
 
-would be difficult to just split via whitespace as there are places in the code (expectedly) that do not contain whitespaces but needs to be separated from what it is ATTACHED to. We thus need to split the source by white space and then join the text before splitting again based on non-word characters using regular expressions. 
+would be difficult to just split via whitespace as there are places in the code (expectedly) that do not contain whitespaces but needs to be separated from what it is ATTACHED to. We thus need to split the source by white space and then join the text before splitting again based on non-word characters using regular expressions.
 
 An example of what lexer.py should be doing:
 

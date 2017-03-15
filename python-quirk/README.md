@@ -40,7 +40,7 @@ First, we define keywords for the lexer to look out for: `var`, `function`, `ret
 
 There are three functions within the program: `SplitSourceByWhiteSpace()`, `SplitSourceByRegex()`, and `Tokenize()`. Each function has a temporary variable in which can be passed in.
 
-The Quirk file's contents will be passed into `SplitSourceByWhiteSpace()` first, where the contents of the file are split based on whitespace, eliminating any unneeded spaces and tabs that we can't properly read. Within the same function, I then utilized Python's `join()` method to make the text a single string, which will be returned and used as an input for `SplitSourceByRegex()`.
+The Quirk file's contents will be passed into `SplitSourceByWhiteSpace()` first, where the contents of the file are split based on whitespace, eliminating any unneeded spaces and tabs that we can't properly read. Within the same function, I then utilized Python's `join()` method to make the text a single string, which will be returned and used as an input for `SplitSourceByRegex()`. Please note that within this function, for debugging purposes for soley the lexer, the print statement can be uncommented to see what is being returned. It MUST be commented out before you move on to include the parser within the commands and in further use of the lexer as it will cause problems otherwise. 
 
 `SplitSourceByRegex()` takes in the return value from `SplitSourceByWhiteSpace()` and splits the text into `allSplits`, a list that contains what is within the source Quirk file. This then returns a list that is used in `Tokenize()`, which tokenizes the lexemes that are passed in and thus checks and replaces for any specific keywords.
 

@@ -4,7 +4,7 @@
 - [ ] get started on interpreter
 
 ## Navigation
-[Lexer](#lexer.py)
+[Lexer](#lexerpy)
 
 ## How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you

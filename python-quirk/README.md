@@ -24,11 +24,13 @@ The parser and the interpreter require inputs of some sort, which are passed in 
 If you would prefer to check the functionality of them separate from one another, then uncomment the lines that contain either the tokens (for the parser) or the tree (for the interpreter) to use for debugging/testing.
 
 ## lexer.py
-### Lexer Grocery List
+### TODO
 - [x] fix the bugs; research delimiters | DONE
 
+### Lexer goals
 The goal of the lexer is to tokenize the contents of the Quirk file that is passed into it. I utilized the tokens that were defined for us, which can be found in the folder `grammar-rules`.
 
+### Function explanation
 First, we define keywords for the lexer to look out for: `var`, `function`, `return`, and `print`.
 
 There are three functions within the program: `SplitSourceByWhiteSpace()`, `SplitSourceByRegex()`, and `Tokenize()`. Each function has a temporary variable in which can be passed in.
@@ -39,7 +41,8 @@ The Quirk file's contents will be passed into `SplitSourceByWhiteSpace()` first,
 
 `Tokenize()` utilizes regex in order to capture all alphabetical and numerical characters that it would otherwise miss--we also account for the keywords here by checking to make sure that a keyword like `var` is not counted as an `IDENT` but instead `VAR`.
 
-As a side note, I realize that there is probably a better way of solving the problem of characters that were stuck together: how do we properly read and parse through a Quirk file if there are no whitespaces? For example:
+### Side Note
+I realize that there is probably a better way of solving the problem of characters that were stuck together: how do we properly read and parse through a Quirk file if there are no whitespaces? For example:
 
 ```
 function SquareDistance(x1, y1, x2, y2) {
@@ -48,15 +51,16 @@ function SquareDistance(x1, y1, x2, y2) {
 var distance = SquareDistance(2, 3, 5, 6)
 ```
 
-would be difficult to just split via whitespace as there are places in the code (expectedly) that do not contain whitespaces but needs to be separated from what it is ATTACHED to. We thus need to split the source by white space and then join the text before splitting again based on non-word characters using regular expressions.
+That would be difficult to just split via whitespace as there are places in the code (expectedly) that do not contain whitespaces but needs to be separated from what it is ATTACHED to. We thus need to split the source by white space and then join the text before splitting again based on non-word characters using regular expressions.
 
-An example of what lexer.py should be doing:
+### Outcome 
+An example of what the lexer should be doing:
 
 Input: `var q = 2`
 
 Output: `["VAR", "IDENT:q", "ASSIGN", "NUMBER:2"]`
 
-This standard output then becomes the standard input for parser.py.
+This standard output then becomes the standard input for the parser.
 
 
 ## parser.py

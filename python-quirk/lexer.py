@@ -1,12 +1,8 @@
 import sys
 import re
 
-#for the lexer
-#defining the numbers and alpha characters will come later
-lexemes = ["var", "function", "return", "print",
-            "=", "+", "-", "*", "/",
-            "^", "(", ")", "{",
-            "}", ",",":"]
+# keywords for the lexer
+lexemes = ["var", "function", "return", "print"]
 
 
 def SplitSourceByWhiteSpace(source):
@@ -16,32 +12,34 @@ def SplitSourceByWhiteSpace(source):
         thisSplit = source[i].split()
         allSplits += thisSplit
     finalString = " "
-    #debugging
-    #print finalString.join(allSplits)
-    return finalString.join(allSplits) #returns a string of the joined splits by whitespace
+    # debugging
+    # print finalString.join(allSplits)
+    # returns a string of the joined splits by whitespace
+    return finalString.join(allSplits)
+
 
 def SplitSourceByRegex(source):
-    '''Splits finalString from SplitSourceByWhiteSpace using a regex expression that
-    captures non-'''
+    '''Splits finalString from SplitSourceByWhiteSpace using a
+    regex expression that captures any non-word character.'''
     allSplits = re.split('(\W)', source)
-    #debugging
+    # debugging
     # print(allSplits)
     return allSplits
+
 
 def Tokenize(source):
     '''Tokenize() takes in the return value from SplitSourceByWhiteSpace
     and then iterates over each value to assign an appropriate token'''
 
-    #compile the regular expressions in order to use them later to
-    #check for matching within the stream of lexemes
+    # Compile the regular expressions for use later
     literalNumber = re.compile(r"((\d+(\.\d*)?)|(\.\d+))")
     literalAlpha = re.compile(r"([a-zA-Z]+[a-zA-Z0-9_]*)")
 
-    position = 0 #beginning of the index
+    position = 0    # beginning of the index
     tokenList = []
     token = ""
     for i in range(len(source)):
-        #keywords
+        # keywords
         if source[i] == "var":
             token = "VAR"
             tokenList.append(token)
@@ -55,7 +53,7 @@ def Tokenize(source):
             token = "PRINT"
             tokenList.append(token)
 
-        #arithmetic operations
+        # arithmetic operations
         if source[i] == "=":
             token = "ASSIGN"
             tokenList.append(token)
@@ -75,7 +73,7 @@ def Tokenize(source):
             token = "EXP"
             tokenList.append(token)
             token = ""
-        #misc
+        # misc
         if source[i] == "{":
             token = "LBRACE"
             tokenList.append(token)
@@ -94,7 +92,7 @@ def Tokenize(source):
         if source[i] == ":":
             token = "COLON"
             tokenList.append(token)
-        #regex
+        # regex
         if literalNumber.match(source[i]):
             token = ("NUMBER:" + source[i])
             tokenList.append(token)
@@ -102,16 +100,15 @@ def Tokenize(source):
             token = ("IDENT:" + source[i])
             tokenList.append(token)
 
-    token = "EOF" #by this point, we should have iterated over the program
+    token = "EOF"
+    # add EOF
     tokenList.append(token)
-
-    #debugging purposes
+    # debugging purposes
     # print (tokenList)
     return tokenList
 
 if __name__ == '__main__':
-    # SplitSourceByRegex(sys.stdin.readlines())
-    tokens = Tokenize(SplitSourceByRegex(SplitSourceByWhiteSpace(sys.stdin.readlines())))
-    #  tokens = Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))
+    tokens = Tokenize(SplitSourceByRegex(
+                SplitSourceByWhiteSpace(sys.stdin.readlines())))
     for i in range(len(tokens)):
         sys.stdout.write(str(tokens[i]) + "\n")

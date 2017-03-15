@@ -3,6 +3,9 @@
 ## General List
 - [ ] get started on interpreter
 
+## Navigation
+[Lexer](#lexer.py)
+
 ## How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you
 are able to use Python 2.7+ (it is coded with 3.0 syntax). Within the terminal, you should
@@ -107,7 +110,7 @@ Continuing with the same example as above, what should be provided as the parse 
 
 ## interpreter.py
 ### TODO
-- [ ] literally everything 
+- [ ] literally everything
 
 The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output.
 

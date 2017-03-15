@@ -4,7 +4,11 @@
 - [ ] get started on interpreter
 
 ## Navigation
-[Lexer](#lexerpy)
+* [How to Use](#how-to-use)
+* [Lexer](#lexerpy)
+* [Parser](#parserpy)
+* [Interpreter](#interpreterpy)
+* [Resources](#resources)
 
 ## How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you

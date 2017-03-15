@@ -1,13 +1,7 @@
 # python-quirk
 
 ## General List
-- [x] heavy lifting for parsing
-- [ ] also for interpreter (what is happening)
-- [ ] update readme.md as you go and w/ explanations of functions
-- [ ] at least three test cases
-- [x] rename files if needed
-- [x] keep only necessary files within repository
-- [x] add quirk-grammar folder later for easier reference
+- [ ] get started on interpreter
 
 ## How to Use:
 Please download/clone the repository onto your desktop or laptop. From there, ensure you
@@ -16,17 +10,43 @@ take your Quirk file and do the following:
 
 `python lexer.py < app.q | python parser.py | python interpreter.py > output`
 
-where `app.q` is your Quirk file. The output of the sequence should be the execution within app.q.
+where `app.q` is your Quirk file.
 
-So if app.q's contents contain only the code `print 4` what should result is the number 4 being printed
-on the terminal.
+If app.q's contents contain only the code `print 4` what should result is the number 4 being printed
+on the terminal. More on specific outputs will be available in the sections below.
+
+If you would like to test the lexer on its own, please uncomment any debugging print lines within the code and type the following within the terminal:
+
+`python lexer.py < app.q`
+
+The parser and the interpreter require inputs of some sort, which are passed in from the lexer.
+
+If you would prefer to check the functionality of them separate from one another, then uncomment the lines that contain either the tokens (for the parser) or the tree (for the interpreter) to use for debugging/testing.
 
 ## lexer.py
 ### Lexer Grocery List
-- [ ] fix the bugs; research delimiters 
+- [x] fix the bugs; research delimiters | DONE
 
-lexer.py reads in a Quirk file, splits the text by white space before splitting once
-more to ensure that lexemes are not stuck together. It is then tokenized based upon the Quirk tokens and specified rules within the code, i.e. what characters/letters/words are reversed for Quirk, regex, etc.
+The goal of the lexer is to tokenize the contents of the Quirk file that is passed into it. I utilized the tokens that were defined for us, which can be found in the folder `grammar-rules`.
+
+First, we define keywords for the lexer to look out for: `var`, `function`, `return`, and `print`.
+
+There are three functions within the program: `SplitSourceByWhiteSpace()`, `SplitSourceByRegex()`, and `Tokenize()`. Each function has a temporary variable in which can be passed in.
+
+The Quirk file's contents will be passed into `SplitSourceByWhiteSpace()` first, where the contents of the file are split based on whitespace, eliminating any unneeded spaces and tabs that we can't properly read. Within the same function, I then utilized Python's `join()` method to make the text a single string, which will be returned and used as an input for `SplitSourceByRegex()`.
+
+`SplitSourceByRegex()` takes in the return value from `SplitSourceByWhiteSpace()` and splits the text into `allSplits`, a list that contains what is within the source Quirk file. This then returns a list that is used in `Tokenize()`, which tokenizes the lexemes that are passed in and thus checks and replaces for any specific keywords.
+
+`Tokenize()` utilizes regex in order to capture all alphabetical and numerical characters that it would otherwise miss--we also account for the keywords here by checking to make sure that a keyword like `var` is not counted as an `IDENT` but instead `VAR`.
+
+As a side note, I realize that there is probably a better way of solving the problem of characters that were stuck together: how do we properly read and parse through a Quirk file if there are no whitespaces? For example:
+
+`function SquareDistance(x1, y1, x2, y2) {
+  return x1 ^ x2 + y1 ^ y2
+  }
+var distance = SquareDistance(2, 3, 5, 6)`
+
+would be difficult to just split via whitespace as there are places in the code (expectedly) that do not contain whitespaces but needs to be separated from what it is ATTACHED to. We thus need to split the source by white space and then join the text before splitting again based on non-word characters using regular expressions. 
 
 An example of what lexer.py should be doing:
 
@@ -36,12 +56,8 @@ Output: `["VAR", "IDENT:q", "ASSIGN", "NUMBER:2"]`
 
 This standard output then becomes the standard input for parser.py.
 
-To solely test lexer.py, type the following in terminal:
-`python lexer.py < app.q`
 
-where `app.q` is the quirk file that you would like to lex.
-
-##parser.py
+## parser.py
 > Interestingly enough, the parser.py will read in all of the tokens but the program is not fully parsed through if there's a second line? Or even more than one line in the program ...
 
 The parser's standard input takes in a stream of tokens from the lexer (I have left within the program test cases/test tokens for debugging purposes). The parser is responsible for building a parser tree via an algorithm that works iteratively. In other words, functions will call on other functions within itself, thus cutting back on work and code. Thanks to Professor Josh McCoy's base, the parser can be relatively easy to understand.
@@ -60,3 +76,6 @@ Each function will return a boolean value that is `True` if the subtree correspo
 
 ## interpreter.py
 The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output.
+
+## Other Resources
+[PEP8 Checker](http://pep8online.com/)

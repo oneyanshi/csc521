@@ -6,7 +6,8 @@ lexemes = ["var", "function", "return", "print"]
 
 
 def SplitSourceByWhiteSpace(source):
-    '''Splits the source by white space and then joins again'''
+    '''Splits the Quirk file's contents by white space and then
+    joins again'''
     allSplits = []
     for i in range(len(source)):
         thisSplit = source[i].split()

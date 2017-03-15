@@ -8,16 +8,25 @@ lexemes = ["var", "function", "return", "print",
             "^", "(", ")", "{",
             "}", ",",":"]
 
+
 def SplitSourceByWhiteSpace(source):
-    '''Splits the source by white space'''
+    '''Splits the source by white space and then joins again'''
     allSplits = []
     for i in range(len(source)):
         thisSplit = source[i].split()
         allSplits += thisSplit
-    #debugging purposes
-    #print(allSplits)
-    return allSplits
+    finalString = " "
+    #debugging
+    #print finalString.join(allSplits)
+    return finalString.join(allSplits) #returns a string of the joined splits by whitespace
 
+def SplitSourceByRegex(source):
+    '''Splits finalString from SplitSourceByWhiteSpace using a regex expression that
+    captures non-'''
+    allSplits = re.split('(\W)', source)
+    #debugging
+    # print(allSplits)
+    return allSplits
 
 def Tokenize(source):
     '''Tokenize() takes in the return value from SplitSourceByWhiteSpace
@@ -67,25 +76,24 @@ def Tokenize(source):
             tokenList.append(token)
             token = ""
         #misc
+        if source[i] == "{":
+            token = "LBRACE"
+            tokenList.append(token)
+        if source[i] == "}":
+            token = "RBRACE"
+            tokenList.append(token)
         if source[i] == "(":
             token = "LPAREN"
             tokenList.append(token)
         if source[i] == ")":
             token = "RPAREN"
             tokenList.append(token)
-        if source[i] == "{":
-            token = "LBRACE"
-            tokenList.append(source[i])
-        if source[i] == "}":
-            token = "RBRACE"
-            tokenList.append(source[i])
         if source[i] == ",":
             token = "COMMA"
             tokenList.append(token)
         if source[i] == ":":
             token = "COLON"
             tokenList.append(token)
-
         #regex
         if literalNumber.match(source[i]):
             token = ("NUMBER:" + source[i])
@@ -102,7 +110,8 @@ def Tokenize(source):
     return tokenList
 
 if __name__ == '__main__':
-     tokens = Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))
-     for i in range(len(tokens)):
-         sys.stdout.write(str(tokens[i]) + "\n")
-         sys.stdout.flush()
+    # SplitSourceByRegex(sys.stdin.readlines())
+    tokens = Tokenize(SplitSourceByRegex(SplitSourceByWhiteSpace(sys.stdin.readlines())))
+    #  tokens = Tokenize(SplitSourceByWhiteSpace(sys.stdin.readlines()))
+    for i in range(len(tokens)):
+        sys.stdout.write(str(tokens[i]) + "\n")

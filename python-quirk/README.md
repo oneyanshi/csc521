@@ -87,7 +87,15 @@ The parser should output a parse tree, whose integrity is preserved by using jso
 Continuing with the same example as above, what should be provided as the parse is the following:
 
 ```
-[True, 2, [u'Program1', [u'Statement2', [u'Print0', u'PRINT', [u'Expression2', [u'Term2', [u'Factor4', [u'Value1', [u'Number0', u'NUMBER:4']]]]]]]]]
+[True, 2,
+  [u'Program1',
+    [u'Statement2',
+      [u'Print0', u'PRINT',
+        [u'Expression2',
+          [u'Term2',
+            [u'Factor4',
+              [u'Value1',
+                [u'Number0', u'NUMBER:4']]]]]]]]]
 ```
 
 

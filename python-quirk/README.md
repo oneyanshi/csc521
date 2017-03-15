@@ -84,7 +84,7 @@ Each function will return a boolean value that is `True` if the subtree correspo
 ### Outcome
 The parser should output a parse tree, whose integrity is preserved by using json capabilities. This output will become the input for the interpreter.
 
-Continuing with the same example as above, what should be provided as the parse is the following:
+Continuing with the same example as above, what should be provided as the parse tree is the following:
 
 ```
 [True, 2,
@@ -98,8 +98,17 @@ Continuing with the same example as above, what should be provided as the parse 
                 [u'Number0', u'NUMBER:4']]]]]]]]]
 ```
 
+(Formatted on the README for readability, what should actually come out of the parser is what follows below.)
+
+```
+[True, 2, [u'Program1', [u'Statement2', [u'Print0', u'PRINT', [u'Expression2', [u'Term2', [u'Factor4', [u'Value1', [u'Number0', u'NUMBER:4']]]]]]]]]
+```
+
 
 ## interpreter.py
+### TODO
+- [ ] literally everything 
+
 The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output.
 
 ## Resources

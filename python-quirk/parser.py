@@ -10,6 +10,7 @@ for line in sys.stdin.readlines():
     for token in line.split():
         tokens.append(token)
 
+#testing tokens
 # tokens=["FUNCTION", "IDENT:SquareDistance", "LPAREN", "IDENT:x1", "COMMA",
 #         "IDENT:y1", "COMMA", "IDENT:x2", "COMMA", "IDENT:y2", "RPAREN",
 #         "LBRACE", "RETURN", "IDENT:x1", "EXP", "IDENT:x2", "ADD",
@@ -530,8 +531,11 @@ def Number(token_index):
 
 if __name__ == '__main__':
     print("starting __main__")
+
     aParseTree = Program(0)
     #debug purposes
     # pp.pprint(aParseTree)
+    # print tokens
     serializedParseTree = json.dumps(aParseTree)
     aCopyOfTheParseTree = json.loads(serializedParseTree)
+    print(aCopyOfTheParseTree)

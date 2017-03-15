@@ -85,9 +85,10 @@ Each function will return a boolean value that is `True` if the subtree correspo
 The parser should output a parse tree, whose integrity is preserved by using json capabilities. This output will become the input for the interpreter.
 
 Continuing with the same example as above, what should be provided as the parse is the following:
-'''
+
+```
 [True, 2, [u'Program1', [u'Statement2', [u'Print0', u'PRINT', [u'Expression2', [u'Term2', [u'Factor4', [u'Value1', [u'Number0', u'NUMBER:4']]]]]]]]]
-'''
+```
 
 
 ## interpreter.py

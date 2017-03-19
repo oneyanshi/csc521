@@ -116,7 +116,7 @@ Continuing with the same example as above, what should be provided as the parse 
 ### TODO
 - [ ] literally everything
 
-The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output.
+The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output. The interpreter accomplishes this by establishing the scope of the program and binding variables, functions, etc. to its appropriate assignment. 
 
 ## Resources
 [PEP8 Checker](http://pep8online.com/)

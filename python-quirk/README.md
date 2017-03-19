@@ -1,4 +1,4 @@
-# python-quirk :sparkles:
+# :sparkles: python-quirk :sparkles:
 
 ## General List
 - [ ] get started on interpreter

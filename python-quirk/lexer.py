@@ -101,12 +101,13 @@ def Tokenize(source):
             token = ("IDENT:" + source[i])
             tokenList.append(token)
 
-    token = "EOF"
     # add EOF
+    token = "EOF"
     tokenList.append(token)
     # debugging purposes
     # print (tokenList)
     return tokenList
+
 
 if __name__ == '__main__':
     tokens = Tokenize(SplitSourceByRegex(

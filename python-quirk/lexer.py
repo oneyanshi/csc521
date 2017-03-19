@@ -112,5 +112,5 @@ def Tokenize(source):
 if __name__ == '__main__':
     tokens = Tokenize(SplitSourceByRegex(
                 SplitSourceByWhiteSpace(sys.stdin.readlines())))
-    for i in range(len(tokens)):
-        sys.stdout.write(str(tokens[i]) + "\n")
+    for token in range(len(tokens)):
+        sys.stdout.write(str(tokens[token]) + "\n")

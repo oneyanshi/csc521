@@ -3,7 +3,7 @@ import pprint
 import json
 
 # for debugging purposes
-# pp = pprint.PrettyPrinter(indent=1, depth=10)
+pp = pprint.PrettyPrinter(indent=1, depth=10)
 
 tokens = []
 for line in sys.stdin.readlines():
@@ -567,8 +567,8 @@ if __name__ == '__main__':
     print("starting __main__")
 
     aParseTree = Program(0)
-    # debug purposes
-    # pp.pprint(aParseTree)
+    # pretty print parse tree 
+    pp.pprint(aParseTree)
     # print tokens
     serializedParseTree = json.dumps(aParseTree)
     aCopyOfTheParseTree = json.loads(serializedParseTree)

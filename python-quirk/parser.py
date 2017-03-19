@@ -46,6 +46,11 @@ def Program(token_index):
     '''<Program> ->
         <Statement> <Program>
         | <Statement>
+
+    Checks for the success (returns true/false) of finding/encountering
+    a token within the stream from the lexer and iterates through the
+    stream token by token. Returns the success, index and subtree based
+    on the success of the function.
     '''
     # <Statement> <Program>
     (success, returned_index, returned_subtree) = Statement(token_index)

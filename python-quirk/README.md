@@ -94,12 +94,7 @@ The parser should output a parse tree, whose integrity is preserved by using JSO
 Continuing with the same example as above, what should be provided as the parse tree is the following:
 
 ```
-['Program1',
- ['Statement2',
-  ['Print0',
-   'PRINT',
-   ['Expression2',
-    ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:4']]]]]]]]
+["Program1", ["Statement2", ["Print0", "PRINT", ["Expression2", ["Term2", ["Factor4", ["Value1", ["Number0", "NUMBER:4"]]]]]]]]
 ```
 
 ## interpreter.py

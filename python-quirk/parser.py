@@ -567,8 +567,10 @@ if __name__ == '__main__':
 
     aParseTree = Program(0)[2]
     # debug purpose
-    pp.pprint(aParseTree)
+    # pp.pprint(aParseTree)
     # print tokens
     serializedParseTree = json.dumps(aParseTree)
-    aCopyOfTheParseTree = json.loads(serializedParseTree)
-    print(aCopyOfTheParseTree)
+    print(serializedParseTree)
+    #debug purposes
+    # aCopyOfTheParseTree = json.loads(serializedParseTree)
+    # print(aCopyOfTheParseTree)

@@ -66,7 +66,6 @@ def Program(token_index):
     if success:
         subtree = ["Program1", returned_subtree]
         return [True, returned_index, subtree]
-
     return [False, token_index, []]
 
 
@@ -566,8 +565,8 @@ def Number(token_index):
 if __name__ == '__main__':
     print("starting __main__")
 
-    aParseTree = Program(0)
-    # pretty print parse tree 
+    aParseTree = Program(0)[2]
+    # debug purpose
     pp.pprint(aParseTree)
     # print tokens
     serializedParseTree = json.dumps(aParseTree)

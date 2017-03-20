@@ -94,34 +94,12 @@ The parser should output a parse tree, whose integrity is preserved by using JSO
 Continuing with the same example as above, what should be provided as the parse tree is the following:
 
 ```
-[True, 2,
-  [u'Program1',
-    [u'Statement2',
-      [u'Print0', u'PRINT',
-        [u'Expression2',
-          [u'Term2',
-            [u'Factor4',
-              [u'Value1',
-                [u'Number0', u'NUMBER:4']]]]]]]]]
-```
-
-(Formatted on the README for readability, what should actually come out of the parser is what follows below.)
-
-```
-[True, 2, [u'Program1', [u'Statement2', [u'Print0', u'PRINT', [u'Expression2', [u'Term2', [u'Factor4', [u'Value1', [u'Number0', u'NUMBER:4']]]]]]]]]
-```
-
-If we do not use JSON, the output will appear like this (using pretty print):
-
-```
-[True,
- 2,
- ['Program1',
-  ['Statement2',
-   ['Print0',
-    'PRINT',
-    ['Expression2',
-     ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:4']]]]]]]]]
+['Program1',
+ ['Statement2',
+  ['Print0',
+   'PRINT',
+   ['Expression2',
+    ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:4']]]]]]]]
 ```
 
 ## interpreter.py

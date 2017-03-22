@@ -56,7 +56,7 @@ def Program(token_index):
     (success, returned_index, returned_subtree) = Statement(token_index)
     if success:
         subtree = ["Program0", returned_subtree]
-        (success, returned_index, returned_subtree) = Program(token_index + 1)
+        (success, returned_index, returned_subtree) = Program(returned_index)
         if success:
             subtree.append(returned_subtree)
             return [True, returned_index, subtree]

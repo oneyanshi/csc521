@@ -3,7 +3,7 @@ import pprint
 import json
 
 # for debugging purposes
-pp = pprint.PrettyPrinter(indent=1, depth=10)
+pp = pprint.PrettyPrinter(indent=1, depth=20)
 
 tokens = []
 for line in sys.stdin.readlines():
@@ -150,7 +150,7 @@ def FunctionBody(token_index):
     if success:
         subtree = ["FunctionBody0", returned_subtree]
         (success, returned_index, returned_subtree) = Return(
-            token_index + 1)
+            returned_index)
         if success:
             subtree.append(returned_subtree)
             return [True, returned_index, subtree]
@@ -480,7 +480,7 @@ def FunctionCallParams(token_index):
         subtree = ["FunctionCallParams0", returned_subtree]
         if "RPAREN" == tokens[returned_index]:
             subtree.append(tokens[returned_index])
-            return [True, returned_index, subtree]
+            return [True, returned_index + 1, subtree]
     # RPAREN
     if "RPAREN" == tokens[token_index]:
         subtree = ["FunctionCallParams1", tokens[token_index]]
@@ -567,7 +567,7 @@ if __name__ == '__main__':
 
     aParseTree = Program(0)[2]
     # debug purpose
-    # pp.pprint(aParseTree)
+    #pp.pprint(aParseTree)
     # print tokens
     serializedParseTree = json.dumps(aParseTree)
     print(serializedParseTree)

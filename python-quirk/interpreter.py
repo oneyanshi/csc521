@@ -393,7 +393,7 @@ def FunctionCall1(pt, scope):
     '''
     name = func_by_name(pt[1][0], pt[1], scope)[1]
     func_info = [lookup_in_scope_stack(name, scope), name]
-    scope[name] =
+    scope[name] = ["__parent__" + ]
 
 
 

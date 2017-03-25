@@ -1,7 +1,7 @@
 # :sparkles: python-quirk :sparkles:
 
 ## General List
-- [ ] get started on interpreter
+- [ ] finish the rest of the interpreter 
 
 ## Navigation
 * [How to Use](#how-to-use)
@@ -99,12 +99,13 @@ Continuing with the same example as above, what should be provided as the parse 
 
 ## interpreter.py
 ### TODO
-- [ ] literally everything
+- [ ] work on piping the tree into the interpreter
+- [ ] function functionality! they need to work still
 
 The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output. The interpreter accomplishes this by establishing the scope of the program and binding variables, functions, etc. to its appropriate assignment.
 
 ### Outcome
-In following with the example, the parse tree would be traversed and added into the scope of the problem. The outcome will then be the ```4.0```. 
+In following with the example, the parse tree would be traversed and added into the scope of the problem. The outcome will then be the ```4.0```.
 
 ## Resources
 [PEP8 Checker](http://pep8online.com/)

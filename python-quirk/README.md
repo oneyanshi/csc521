@@ -1,7 +1,7 @@
 # :sparkles: python-quirk :sparkles:
 
 ## General List
-- [ ] finish the rest of the interpreter 
+- [ ] finish the rest of the interpreter
 
 ## Navigation
 * [How to Use](#how-to-use)
@@ -101,6 +101,7 @@ Continuing with the same example as above, what should be provided as the parse 
 ### TODO
 - [ ] work on piping the tree into the interpreter
 - [ ] function functionality! they need to work still
+- [ ] MultipleAssignment0 requires edit 
 
 The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output. The interpreter accomplishes this by establishing the scope of the program and binding variables, functions, etc. to its appropriate assignment.
 

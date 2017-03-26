@@ -12,12 +12,6 @@ data = (sys.stdin.readlines())[1]
 aCopyOfData = json.loads(data)
 
 #start utilities
-def traverse(data):
-    for leaf in data:
-        traverse.level += 1
-        traverse(data)
-        traverse.level -= 1
-
 def eprint(msg):
 	'''Prints to stderr.
 	'''

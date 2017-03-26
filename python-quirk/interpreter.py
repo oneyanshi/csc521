@@ -395,6 +395,7 @@ def FunctionCall1(pt, scope):
     # print(param_values)
     #
     # pp.pprint(scope)
+    return -1
 
 
 #<FunctionCallParams> ->  <ParameterList> RPAREN | RPAREN

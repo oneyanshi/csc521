@@ -7,6 +7,7 @@ import json
 
 pp = pprint.PrettyPrinter(indent=1, depth=100)
 
+# load in tree from parser.py
 data = (sys.stdin.readlines())[1]
 aCopyOfData = json.loads(data)
 

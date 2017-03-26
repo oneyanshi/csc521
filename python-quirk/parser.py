@@ -5,6 +5,7 @@ import json
 # for debugging purposes
 pp = pprint.PrettyPrinter(indent=1, depth=20)
 
+#feed the tokens into parser
 tokens = []
 for line in sys.stdin.readlines():
     for token in line.split():
@@ -567,10 +568,13 @@ if __name__ == '__main__':
 
     aParseTree = Program(0)[2]
     # debug purpose
-    #pp.pprint(aParseTree)
+    # pp.pprint(aParseTree)
     # print tokens
+
     serializedParseTree = json.dumps(aParseTree)
-    print(serializedParseTree)
-    #debug purposes
+    sys.stdout.write(serializedParseTree)
+
+    # debug purposes
+    # print(serializedParseTree)
     # aCopyOfTheParseTree = json.loads(serializedParseTree)
     # print(aCopyOfTheParseTree)

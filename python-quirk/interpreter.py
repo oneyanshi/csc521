@@ -2,89 +2,21 @@
 from __future__ import print_function
 import sys
 import pprint
+import json
 
 
 pp = pprint.PrettyPrinter(indent=1, depth=100)
 
-tree = ['Value0', ['Name1', 'SUB', 'IDENT:x']]
-tree = ['FunctionDeclaration0',
-    'FUNCTIION',
-    ['Name0', 'IDENT:FooFunk'],
-    'LPAREN',
-    ['FunctionParams0',
-        ['NameList0',
-            ['Name0',"IDENT:a"],
-            'COMMA',
-            ['NameList1', ['Name0', "IDENT:b"]]],
-        'RPAREN'],
-    'LBRACE',
-    ['FunctionBody1',
-        ['Return0',
-            ['NameList0',
-                ['Name0',"IDENT:y"],
-                'COMMA',
-                ['NameList1', ['Name0', "IDENT:z"]]]
-
-        ]],
-    'RBRACE']
-
-'''Scope example:
-var x = 4 #{'x':4}
-function foo(z) {
-    foo(z/2)
-    return z + x
-}
-foo(14)
-Inside of foo(14), the scope looks like this:
-{
- 'z':7,
- "__parent__": {
-    'z':14,
-    "__parent__": {
-        'x':4
-    }
- }
-}
-'''
-
-'''For testing function calls. The source:
-FooFunk(x - 4, z)
-'''
-tree_with_function_call = ["FunctionCall0",
-    ['Name0', "IDENT:FooFunk"],
-    'LPAREN',
-    ['FunctionCallParams0',
-        ["ParameterList0",
-            ["Parameter0",
-                ['Expression1',
-                   ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:x']]]],
-                   'SUB',
-                   ['Expression2',
-                        ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:4']]]]
-                   ]
-                ]
-            ],
-            'COMMA',
-            ['ParameterList1',
-                ['Parameter1', ['Name0', "IDENT:z"]]
-            ]
-        ],
-        'RPAREN'
-    ]
-]
-
-scope_with_function = {
-        'x':100,
-        'z':101,
-        'FooFunk': [['a', 'b'],
-             ['FunctionBody1',
-              ['Return0',
-               ['NameList0',
-                ['Name0', 'IDENT:y'],
-                'COMMA',
-                ['NameList1', ['Name0', 'IDENT:z']]]]]]}
+data = (sys.stdin.readlines())[1]
+aCopyOfData = json.loads(data)
 
 #start utilities
+def traverse(data):
+    for leaf in data:
+        traverse.level += 1
+        traverse(data)
+        traverse.level -= 1
+
 def eprint(msg):
 	'''Prints to stderr.
 	'''
@@ -460,206 +392,9 @@ def Number2(pt, scope):
 	return get_number_from_ident(pt[2])
 
 
-#corresponds to: print 1 + 4 - 3
-e1tree = ['Program1',
- ['Statement2',
-  ['Print0',
-   'PRINT',
-   ['Expression0',
-    ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:1']]]],
-    'ADD',
-    ['Expression1',
-     ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:4']]]],
-     'SUB',
-     ['Expression2',
-      ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:3']]]]]]]]]]
-
-# corresponds to: print 6 / 2
-e2tree = ["Program1",
-            ["Statement2",
-                ["Print0",
-                "PRINT",
-                ["Expression2",
-                    ["Term1", ["Factor4", ["Value1", ["Number0", "NUMBER:6"]]],
-                    "DIV",
-                    ["Term2", ["Factor4", ["Value1", ["Number0", "NUMBER:2"]]]]]]]]]
-
-# corresponds to print 4 ^ 2
-e3tree = ["Program1",
-            ["Statement2",
-                ["Print0",
-                "PRINT",
-                ["Expression2",
-                ["Term2", ["Factor3", ["Value1", ["Number0", "NUMBER:4"]],
-                    "EXP",
-                ["Factor4", ["Value1", ["Number0", "NUMBER:2"]]]]]]]]]
-
-'''
-function foo_func(){
-  return 2 ^ 8
-}
-
-print foo_func()
-
-out: 256.0
-'''
-
-e5tree = ['Program0',
- ['Statement0',
-  ['FunctionDeclaration0',
-   'FUNCTION',
-   ['Name0', 'IDENT:foo_func'],
-   'LPAREN',
-   ['FunctionParams1', 'RPAREN'],
-   'LBRACE',
-   ['FunctionBody1',
-    ['Return0',
-     'RETURN',
-     ['ParameterList1',
-      ['Parameter0',
-       ['Expression2',
-        ['Term2',
-         ['Factor3',
-          ['Value1', ['Number0', 'NUMBER:2']],
-          'EXP',
-          ['Factor4', ['Value1', ['Number0', 'NUMBER:8']]]]]]]]]],
-   'RBRACE']],
- ['Program1',
-  ['Statement2',
-   ['Print0',
-    'PRINT',
-    ['Expression2',
-     ['Term2',
-      ['Factor2',
-       ['FunctionCall1',
-        ['Name0', 'IDENT:foo_func'],
-        'LPAREN',
-        ['FunctionCallParams1', 'RPAREN']]]]]]]]]
-
-''' var x = (5 * 2) / 5
-    print x
-    out: 2.0'''
-e6tree = ['Program0',
- ['Statement1',
-  ['Assignment0',
-   ['SingleAssignment0',
-    'VAR',
-    ['Name0', 'IDENT:x'],
-    'ASSIGN',
-    ['Expression2',
-     ['Term1',
-      ['Factor1',
-       ['SubExpression0',
-        'LPAREN',
-        ['Expression2',
-         ['Term0',
-          ['Factor4', ['Value1', ['Number0', 'NUMBER:5']]],
-          'MULT',
-          ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:2']]]]]],
-        'RPAREN']],
-      'DIV',
-      ['Term2', ['Factor4', ['Value1', ['Number0', 'NUMBER:5']]]]]]]]],
- ['Program1',
-  ['Statement2',
-   ['Print0',
-    'PRINT',
-    ['Expression2',
-     ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:x']]]]]]]]]
-
-
-example4 = ['Program0',
- ['Statement0',
-  ['FunctionDeclaration0',
-   'FUNCTION',
-   ['Name0', 'IDENT:baz_func'],
-   'LPAREN',
-   ['FunctionParams0',
-    ['NameList0',
-     ['Name0', 'IDENT:a'],
-     'COMMA',
-     ['NameList1', ['Name0', 'IDENT:b']]],
-    'RPAREN'],
-   'LBRACE',
-   ['FunctionBody0',
-    ['Program0',
-     ['Statement1',
-      ['Assignment0',
-       ['SingleAssignment0',
-        'VAR',
-        ['Name0', 'IDENT:y'],
-        'ASSIGN',
-        ['Expression1',
-         ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:a']]]],
-         'SUB',
-         ['Expression2',
-          ['Term2',
-           ['Factor4', ['Value0', ['Name2', 'ADD', 'IDENT:b']]]]]]]]],
-     ['Program1',
-      ['Statement1',
-       ['Assignment0',
-        ['SingleAssignment0',
-         'VAR',
-         ['Name0', 'IDENT:z'],
-         'ASSIGN',
-         ['Expression1',
-          ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:a']]]],
-          'SUB',
-          ['Expression2',
-           ['Term2',
-            ['Factor4', ['Value0', ['Name1', 'SUB', 'IDENT:b']]]]]]]]]]],
-    ['Return0',
-     'RETURN',
-     ['ParameterList0',
-      ['Parameter0',
-       ['Expression2',
-        ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:y']]]]]],
-      'COMMA',
-      ['ParameterList1',
-       ['Parameter0',
-        ['Expression2',
-         ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:z']]]]]]]]]],
-   'RBRACE']],
- ['Program0',
-  ['Statement1',
-   ['Assignment1',
-    ['MultipleAssignment0',
-     'VAR',
-     ['NameList0',
-      ['Name0', 'IDENT:v'],
-      'COMMA',
-      ['NameList1', ['Name0', 'IDENT:w']]],
-     'ASSIGN',
-     ['FunctionCall1',
-      ['Name0', 'IDENT:baz_func'],
-      'LPAREN',
-      ['FunctionCallParams0',
-       ['ParameterList0',
-        ['Parameter0',
-         ['Expression2',
-          ['Term2',
-           ['Factor4', ['Value1', ['Number1', 'SUB', 'NUMBER:5']]]]]],
-        'COMMA',
-        ['ParameterList1',
-         ['Parameter0',
-          ['Expression2',
-           ['Term2',
-            ['Factor4', ['Value1', ['Number2', 'ADD', 'NUMBER:2']]]]]]]],
-       'RPAREN']]]]],
-  ['Program0',
-   ['Statement2',
-    ['Print0',
-     'PRINT',
-     ['Expression2',
-      ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:v']]]]]]],
-   ['Program1',
-    ['Statement2',
-     ['Print0',
-      'PRINT',
-      ['Expression2',
-       ['Term2', ['Factor4', ['Value0', ['Name0', 'IDENT:w']]]]]]]]]]]
 if __name__ == '__main__':
     # choose a parse tree and initial scope
-    tree = e5tree
+    tree = aCopyOfData
     scope = {}
     # execute the program starting at the top of the tree
     func_by_name(tree[0], tree, scope)

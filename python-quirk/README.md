@@ -1,7 +1,7 @@
 # :sparkles: python-quirk :sparkles:
 
 ## General List
-- [ ] finish the rest of the interpreter
+- [ ] finish the rest of the interpreter (function calls in particular, multiple assignment)
 
 ## Navigation
 * [How to Use](#how-to-use)

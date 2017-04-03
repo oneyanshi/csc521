@@ -114,3 +114,4 @@ if __name__ == '__main__':
                 SplitSourceByWhiteSpace(sys.stdin.readlines())))
     for token in range(len(tokens)):
         sys.stdout.write(str(tokens[token]) + "\n")
+        

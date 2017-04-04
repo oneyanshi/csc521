@@ -102,6 +102,8 @@ Continuing with the same example as above, what should be provided as the parse 
 - [ ] function functionality! MultipleAssignment compatibility
 - [ ] MultipleAssignment0 requires edit
 
+Currently, the interpreter works up to example 3 of the code. This has been tested; for examples 4-5 to work, I would need to complete/rewrite functions dealing with multiple assignment in order for it to compatiable with the other portions of the code. 
+
 The interpreter takes in the parser's output, the tree, and then executes the code. This is where the code `print 4` would actually be executed after being ran through the lexer and the parser. The output of the interpreter should be the code's output. The interpreter accomplishes this by establishing the scope of the program and binding variables, functions, etc. to its appropriate assignment.
 
 ### Outcome

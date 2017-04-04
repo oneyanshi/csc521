@@ -15,7 +15,7 @@ aCopyOfData = json.loads(data)
 def eprint(msg):
     '''Prints to stderr.
     '''
-    print(msg, file=sys.stderr)
+    print(msg, file = sys.stderr)
 
 
 def lookup_in_scope_stack(name, scope):
@@ -88,6 +88,7 @@ def Program1(pt, scope):
 def Statement0(pt, scope):
     # <FunctionDeclaration>
     func_by_name(pt[1][0], pt[1], scope)
+
 
 def Statement1(pt, scope):
     # <Assignment>
@@ -328,6 +329,7 @@ def FunctionCall1(pt, scope):
     values = func_by_name(stored_pt[1][0], stored_pt[1], new_scope)
     return values
 
+
 # <FunctionCallParams> ->  <ParameterList> RPAREN | RPAREN
 def FunctionCallParams0(pt, scope):
     # <ParameterList> RPAREN
@@ -389,37 +391,6 @@ def Number2(pt, scope):
     # ADD NUMBER
     return get_number_from_ident(pt[2])
 
-testTree = ['Program0',
- ['Statement0',
-  ['FunctionDeclaration0',
-   'FUNCTION',
-   ['Name0', 'IDENT:foo_func'],
-   'LPAREN',
-   ['FunctionParams1', 'RPAREN'],
-   'LBRACE',
-   ['FunctionBody1',
-    ['Return0',
-     'RETURN',
-     ['ParameterList1',
-      ['Parameter0',
-       ['Expression2',
-        ['Term2',
-         ['Factor3',
-          ['Value1', ['Number0', 'NUMBER:2']],
-          'EXP',
-          ['Factor4', ['Value1', ['Number0', 'NUMBER:8']]]]]]]]]],
-   'RBRACE']],
- ['Program1',
-  ['Statement2',
-   ['Print0',
-    'PRINT',
-    ['Expression2',
-     ['Term2',
-      ['Factor2',
-       ['FunctionCall1',
-        ['Name0', 'IDENT:foo_func'],
-        'LPAREN',
-        ['FunctionCallParams1', 'RPAREN']]]]]]]]]
 
 if __name__ == '__main__':
     # choose a parse tree and initial scope

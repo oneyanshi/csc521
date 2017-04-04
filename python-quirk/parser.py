@@ -5,7 +5,7 @@ import json
 # for debugging purposes
 pp = pprint.PrettyPrinter(indent=1, depth=20)
 
-#feed the tokens into parser
+# feed the tokens into parser
 tokens = []
 for line in sys.stdin.readlines():
     for token in line.split():

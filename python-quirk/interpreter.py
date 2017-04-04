@@ -13,9 +13,9 @@ aCopyOfData = json.loads(data)
 
 #start utilities
 def eprint(msg):
-	'''Prints to stderr.
-	'''
-	print(msg, file=sys.stderr)
+    '''Prints to stderr.
+    '''
+    print(msg, file=sys.stderr)
 
 
 def lookup_in_scope_stack(name, scope):
@@ -174,7 +174,7 @@ def MultipleAssignment0(pt, scope):
 
 # <Print> -> PRINT <Expression>
 def Print0(pt, scope):
-	print(str(func_by_name(pt[2][0], pt[2], scope)))
+    print(str(func_by_name(pt[2][0], pt[2], scope)))
 
 
 # <NameList> -> <Name> COMMA <NameList> | <Name>
@@ -222,15 +222,15 @@ def Expression0(pt, scope):
 
 
 def Expression1(pt, scope):
-	#<Term> SUB <Expression>
-	left_value = func_by_name(pt[1][0], pt[1], scope)
-	right_value = func_by_name(pt[3][0], pt[3], scope)
-	return left_value - right_value
+    #<Term> SUB <Expression>
+    left_value = func_by_name(pt[1][0], pt[1], scope)
+    right_value = func_by_name(pt[3][0], pt[3], scope)
+    return left_value - right_value
 
 
 def Expression2(pt, scope):
-	#<Term>
-	return func_by_name(pt[1][0], pt[1], scope)
+    #<Term>
+    return func_by_name(pt[1][0], pt[1], scope)
 
 
 #<Term> -> <Factor> MULT <Term> | <Factor> DIV <Term> | <Factor>
@@ -347,47 +347,47 @@ def SubExpression0(pt, scope):
 #<Value> -> <Name> | <Number>
 def Value0(pt, scope):
     # <Name>
-	return func_by_name(pt[1][0], pt[1], scope)[0]
+    return func_by_name(pt[1][0], pt[1], scope)[0]
 
 
 def Value1(pt, scope):
     # <Number>
-	return func_by_name(pt[1][0], pt[1], scope)
+    return func_by_name(pt[1][0], pt[1], scope)
 
 
 #<Name> -> IDENT | SUB IDENT | ADD IDENT
 def Name0(pt, scope):
     # IDENT
-	name = get_name_from_ident(pt[1])
-	return [lookup_in_scope_stack(name, scope), name]
+    name = get_name_from_ident(pt[1])
+    return [lookup_in_scope_stack(name, scope), name]
 
 
 def Name1(pt, scope):
     # SUB IDENT
-	name = get_name_from_ident(pt[2])
-	return [-lookup_in_scope_stack(name, scope), name]
+    name = get_name_from_ident(pt[2])
+    return [-lookup_in_scope_stack(name, scope), name]
 
 
 def Name2(pt, scope):
     # ADD IDENT
-	name = get_name_from_ident(pt[2])
-	return [lookup_in_scope_stack(name, scope), name]
+    name = get_name_from_ident(pt[2])
+    return [lookup_in_scope_stack(name, scope), name]
 
 
 #<Number> -> NUMBER | SUB NUMBER | ADD NUMBER
 def Number0(pt, scope):
     # NUMBER
-	return get_number_from_ident(pt[1])
+    return get_number_from_ident(pt[1])
 
 
 def Number1(pt, scope):
     # SUB NUMBER
-	return -get_number_from_ident(pt[2])
+    return -get_number_from_ident(pt[2])
 
 
 def Number2(pt, scope):
     # ADD NUMBER
-	return get_number_from_ident(pt[2])
+    return get_number_from_ident(pt[2])
 
 testTree = ['Program0',
  ['Statement0',

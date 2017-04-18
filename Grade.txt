@@ -1,0 +1,29 @@
+Lexer - 30/30
+
+  Example 1 CORRECTLY LEXED
+  Example 2 CORRECTLY LEXED
+  Example 3 CORRECTLY LEXED
+  Example 4 CORRECTLY LEXED
+  Example 5 CORRECTLY LEXED
+
+Parser: 30/30
+
+  Example 1 CORRECTLY PARSED
+  Example 2 CORRECTLY PARSED
+  Example 3 CORRECTLY PARSED
+  Example 4 CORRECTLY PARSED
+  Example 5 CORRECTLY PARSED
+
+Interpreter: 15/20
+
+  Example 1 CORRECTLY INTERPRETED
+  Example 2 CORRECTLY INTERPRETED
+  Example 3 CORRECTLY INTERPRETED
+  Example 4 was not able to be interpreted
+  Example 5 was incorrectly interpreted
+
+Style: 19/20
+
+    While there were no errors within the code, when linting some warnings did
+    pop up. All in all there weren't many repeating, just a few in the
+    interpreter which caused the one point decrement.

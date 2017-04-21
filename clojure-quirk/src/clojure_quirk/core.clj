@@ -12,6 +12,7 @@
 (defn fifth [aList] (nth aList 4)) 
 (defn sixth [aList] (nth aList 5))
 
+; calling the functions by the label :Statement
 (defn CallbyLabel [funLabel & args]
   (apply(resolve(symbol(name funLabel))) args))
  
@@ -42,6 +43,7 @@
  
  (def parse-tree(parser stdin))
  
+ ; if SHOW_PARSE_TREE = true, then print the parse tree
  (if(= true SHOW_PARSE_TREE)
    (println parse-tree))
 )

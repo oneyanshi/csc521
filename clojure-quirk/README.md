@@ -30,7 +30,7 @@ If you'd like to see the parse tree within terminal, type the following commands
 
 `lein run -pt<[filename.q]` 
 
-and a parse tree will happen! :sparkle: 
+and a parse tree will happen! :sparkles: 
 
 ## Interpreter 
 

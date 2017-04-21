@@ -3,7 +3,7 @@
 A parser and interpreter written in Clojure for an imaginary grammar/language called Quirk. 
 
 ## TODO:
-- [ x ]  Parser works just fine, able to slurp in an outside .q file. 
+- [x]  Parser works just fine, able to slurp in an outside .q file. 
 - [ ] Need to work on interpreter 
 - [ ] Clojure correctness ; coding standards check? 
 - [ ] Flesh out README 

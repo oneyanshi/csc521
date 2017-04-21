@@ -26,6 +26,12 @@ For the parser, we were able to use [instaparse](https://github.com/Engelberg/in
 
 In order to read this quirk grammar file, don't forget to use slurp! 
 
+If you'd like to see the parse tree within terminal, type the following commands: 
+
+`lein run -pt<[filename.q]` 
+
+and a parse tree will happen! :sparkle: 
+
 ## Interpreter 
 
 ## Final Thoughts 

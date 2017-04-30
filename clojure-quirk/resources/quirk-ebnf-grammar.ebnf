@@ -25,22 +25,26 @@ Value := Name | Number
 Name := IDENT | SUB IDENT | ADD IDENT 
 Number := NUMBER | SUB NUMBER | ADD NUMBER
 
+(* terminals *) 
 VAR:= #"var"; 
 FUNCTION:= #"function"; 
 RETURN:= #"return";
-PRINT:= #"print"; 
+PRINT:= #"print";
+ 
 ASSIGN:= "="; 
 ADD:= "+"; 
 SUB:= "-"; 
 MULT:= "*"; 
 DIV:= "/"; 
 EXP:="^";
+
 LPAREN:="(";
 RPAREN:=")";
 LBRACE:="{";
 RBRACE:="}";
 COMMA:=",";
 COLON:=":";
+
 NUMBER:=#"((\d+(\.\d*)?)|(\.\d+))";
 IDENT:=#"[a-zA-Z]+[a-zA-Z0-9_]*";
 

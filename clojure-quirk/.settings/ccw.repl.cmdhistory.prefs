@@ -1,2 +1,2 @@
-cmdhistory=["(as-and-bs \\"aaaaaaaabbbbaaaabb\\")" "(as-and-bs \\"print 4\\")" "(-main -pt)" "(-main)" "(-main -pt)"]
+cmdhistory=["(as-and-bs \\"aaaaaaaabbbbaaaabb\\")" "(as-and-bs \\"print 4\\")" "(-main -pt)" "(-main)" "(-main -pt)" "(defn Program)" "(parser \\"print 9\\")" "(parser \\"print 5\\")" "(Print \\"print 5\\")" "(parser \\"print 5\\")" "(parse\\"print 5\\")" "(parse \\"print 5\\")" "(parser \\"print 5\\")" "(println(parse \\"print 5\\"))" "(parser \\"print 5\\")" "(print 5)" "(parse \\"print 5\\")" "(parser \\"print 5\\")" "parser \\"print 5\\"" "(parser \\"print 5\\");" "(parser \\"print 5\\")" "print \\"9\\"" "print 1341" "print apples" "print \\"apples\\"" "(parser \\"print 5\\")"]
 eclipse.preferences.version=1

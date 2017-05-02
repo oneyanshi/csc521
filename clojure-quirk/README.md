@@ -5,7 +5,7 @@ A parser and interpreter written in Clojure for an imaginary grammar/language ca
 ## TODO:
 - [x]  Parser works just fine, able to slurp in an outside .q file. 
 - [ ] Need to work on interpreter
-- [ ] Example 1 
+- [x] Example 1 
 - [ ] Example 2 
 - [ ] Example 3 
 - [ ] Example 4 

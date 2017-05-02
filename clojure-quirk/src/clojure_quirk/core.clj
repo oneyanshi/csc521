@@ -52,12 +52,26 @@
 
 
 ; <FunctionDeclaration> -> FUNCTION <Name> PAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
+(defn FunctionDeclaration [subtree scope] 
+  (println "FunctionDeclaration")
+  
+  )
 
 ; <FunctionParams> -> <NameList> RPAREN | RPAREN 
+(defn FunctionParams [subtree scope]
+  (println "FunctionParams")
+  
+  )
 
 ; <FunctionBody> -> <Program> <Return> | <Return> 
+(defn FunctionBody [subtree scope]
+  (println "FunctionBody")
+  )
 
 ; <Return> -> RETURN <ParameterList> 
+(defn Return [subtree scope]
+  (println "Return")
+  )
 
 ; <Assignment> - <SingleAssignment> | <MultipleAssignment> 
 (defn Assignment [subtree scope]
@@ -69,7 +83,7 @@
   )
   
 
- <SingleAssignment> -> VAR <Name> ASSIGN <Expression> 
+; <SingleAssignment> -> VAR <Name> ASSIGN <Expression> 
 (defn SingleAssignment [subtree scope] 
   (println "SingleaAssignment")
   ;(println subtree)
@@ -218,9 +232,22 @@
 ; <Number> -> NUMBER | SUB NUMBER | ADD NUMBER
 (defn MyNumber [subtree scope]
   (println "Number")
-  (println subtree)
-  (println (count subtree))
-  
+  ;(println subtree)
+  ;(println (count subtree))
+  ;(println(first (second subtree)) (second subtree))
+  ;(println(second(second subtree)))  
+  ;(println(Double/parseDouble (second(second subtree))))
+
+  (cond 
+    (= :NUMBER (first(second subtree)))
+    (ret-print(Double/parseDouble(second(second subtree))))
+    
+    (= :SUB (first(second subtree)))
+    (ret-print(* -1 (Double/parseDouble(second(second subtree)))))
+    
+    (= :ADD (first(second subtree)))
+    (ret-print(+ (Double/parseDouble(second(second subtree)))))
+    )
   )
 
    
@@ -253,8 +280,9 @@
  ; if SHOW_PARSE_TREE = true, then print the parse tree
  (if(= true SHOW_PARSE_TREE)
    (println parse-tree)
+   ;(println interpreted)
    )
-    (println interpreted)
+    ;(println interpreted)
  ) 
 
 

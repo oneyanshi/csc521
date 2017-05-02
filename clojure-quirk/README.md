@@ -4,7 +4,12 @@ A parser and interpreter written in Clojure for an imaginary grammar/language ca
 
 ## TODO:
 - [x]  Parser works just fine, able to slurp in an outside .q file. 
-- [ ] Need to work on interpreter 
+- [ ] Need to work on interpreter
+- [ ] Example 1 
+- [ ] Example 2 
+- [ ] Example 3 
+- [ ] Example 4 
+- [ ] Example 5  
 - [ ] Clojure correctness ; coding standards check? 
 - [ ] Flesh out README 
 

@@ -1,11 +1,6 @@
 (ns clojure-quirk.core
   (:require [instaparse.core :as insta]))
 
-; the goal is to do lein run -pt < simple.q 
-; the goal is to do lein run < simple.q 
-; sample for reading all stdin 
-; (def stdin (slurp *in*)) 
-
 ; begin utility functions 
 (defn third [aList] (nth aList 2))
 (defn fourth [aList] (nth aList 3))
@@ -13,27 +8,37 @@
 (defn sixth [aList] (nth aList 5))
 
 ; calling the functions by the label :Statement
-(defn CallBylabel [funLabel & args]
+(defn CallByLabel [funLabel & args]
   (apply(ns-resolve 'clojure-quirk.core (symbol(name funLabel))) args)
   )
- 
+
+(defn ret-print [thingToPrint] 
+  (println thingToPrint)
+  thingToPrint
+  )
+; end utility functions 
 
 ; <Program> --> <Statement> <Program> | <Statement> 
 (defn Program [subtree scope] 
-  (cond 
-    ; Program0 
-    (= :Program (first (third subtree))) 
-    (CallByLabel (first (second subtree)) (second subtree) scope 
-      (CallByLabel(first (third subtree)) (third subtree) scope)) 
+  (println "Program")
+  (println subtree)
+  (cond
+    ;Program0
+    (= :Program (first (third subtree)))
+    ((CallByLabel (first (second subtree)) (second subtree) scope)
+      (CallByLabel (first (third subtree)) (third subtree) scope))
     
-    ; Program1
-    :else 
-    (CallByLabel (first (second subtree)) (second subtree) scope) 
+    ;Program1
+    :else
+    (CallByLabel (first (second subtree)) (second subtree) scope)
     )
   )
 
 ; <Statement> -> <FunctionDeclaration> | <Assignment> | <Print> 
 (defn Statement [subtree scope] 
+  (println "Statement")
+  (println subtree)
+  ; Statement0 and Statement1 and Statement2
   (CallByLabel (first (second subtree)) (second subtree) scope)
   )
 
@@ -48,17 +53,26 @@
 
 ; <Assignment> - <SingleAssignment> | <MultipleAssignment> 
 (defn Assignment [subtree scope] 
+  ; Assignment0 and Assignment1
   (CallByLabel (first (second subtree)) (second subtree) scope)
-  
   )
+  
 
 ; <SingleAssignment> -> VAR <Name> ASSIGN <Expression> 
+;(defn SingleAssignment [subtree scope] 
+;  ; SingleAssignment0 
+;  ; 1. Get the name of the variable 
+;  ; 2. Get the value of the <Expression> 
+;  ; 3. Bind name to value in scope. 
+;  
+;  
+;  )
 
 ; <MultipleAssignment> -> VAR <NameList> ASSIGN <FunctionCall>
 
 ; <Print> -> PRINT <Expression> 
 (defn Print [subtree scope]
-  (println(CallByLabel (first (second subtree)) (second subtree) scope))
+  (ret-print(CallByLabel (first (second subtree)) (second subtree) scope))
   )
 
 ; <NameList> -> <Name> COMMA <NameList> | <Name> 
@@ -72,37 +86,37 @@
 
 
 ; <Expression> -> <Term> ADD <Expression> | <Term> SUB <Expression> | <Term> 
-(defn Expression [subtree scope] 
-	(cond
-   (= 2 (count subtree))
-   (CallByLabel (first (second subtree)) (second subtree) scope) 
-   (= :Term (first (second subtree)))
-		((if (.equals :ADD (first (third subtree)))
-			(+ (CallByLabel (first (second subtree))(second subtree) scope)
-			(CallByLabel (first (fourth subtree))(fourth subtree) scope)))
-		(if (.equals :SUB (first (third subtree)))
-			(- (CallByLabel (first (second subtree))(second subtree) scope)
-			(CallByLabel (first (fourth subtree))(fourth subtree) scope))))	
-	:else
-	(CallByLabel (first (second subtree)) (second subtree) scope)
- )
+(defn Expression [subtree scope]
+	(println "Expression")
+	;(println  (count subtree))
+	
+	(cond (= 2 (count subtree))
+       (CallByLabel (first (second subtree))(second subtree) scope)
+       (= :ADD (first (third subtree)))
+       (+ (CallByLabel (first (second subtree))(second subtree) scope)
+          (CallByLabel (first (fourth subtree))(fourth subtree) scope))
+       (= :SUB (first (third subtree)))
+       (- (CallByLabel (first (second subtree))(second subtree) scope)
+          (CallByLabel (first (fourth subtree))(fourth subtree) scope)))
+ 	
+ ;(println "Done Expression")
+			
 )
 
 ; <Term> -> <Factor> MULT <Term> | <Factor> DIV <Term> | <Factor> 
-(defn Term [subtree scope] 
-  (cond 
-    (= 2 (count subtree))
-    (CallByLabel (first (second subtree)) (second subtree) scope) 
-    (= :Factor (first (second subtree)))
-    ((if (.equals :MULT (first (third subtree)))
-       (* (CallByLabel (first (second subtree))(second subtree) scope)
-          (CallByLabel (first (fourth subtree))(fourth subtree) scope)))
-     (if(.equals :DIV (first (third subtree)))
-       (- (CallByLabel (first(second subtree))(second subtree) scope)
-          (CallByLabel (first (fourth subtree))(fourth subtree) scope))))   
-    :else 
-    (CallByLabel (first (second subtree)) (second subtree) scope)
-    )
+(defn Term [subtree scope]
+  (println "Term") 
+  ;(println (count subtree)) 
+  
+  (cond (= 2 (count subtree)) 
+        (CallByLabel (first (second subtree))(second subtree) scope) 
+        (= :MULT (first (third subtree))) 
+        (* (CallByLabel (first (second subtree))(second subtree) scope) 
+           (CallByLabel (first (fourth subtree))(fourth subtree) scope))
+        (= :DIV (first (third subtree)))
+        (/ (CallByLabel (first (second subtree))(second subtree) scope) 
+           (CallByLabel(first (fourth subtree))(fourth subtree) scope)))
+  ;(println "Done Term); 
   ) 
 
 ; <Factor> -> <SubExpression> EXP <Factor> | <SubExpression> | <FunctionCall> | <Value> EXP <Factor> | <Value> 
@@ -119,6 +133,7 @@
 
 ; <Value> -> <Name> | <Number>
 (defn Value [subtree scope] 
+  ; Value0 and Value1
   (CallByLabel (first (second subtree)) (second subtree) scope) 
   )
 
@@ -127,13 +142,14 @@
 
 
 ; <Number> -> NUMBER | SUB NUMBER | ADD NUMBER
-
+(defn MyNumber [subtree scope] 
+  )
 
    
 ; function for interpretation 
-(defn interpret-quirk [subtree scope] (CallByLabel (first subtree) subtree {}))
-
-
+(defn interpret-quirk [subtree scope] 
+  (CallByLabel (first subtree) subtree {})
+  )
 ; end breakdown 
 
 ; our cool parser 
@@ -146,20 +162,21 @@
 (defn -main [& args]
 
  ; takes in input
- (def stdin (slurp *in*))
+; (def stdin (slurp *in*))
  
  ; is there a command for -pt? 
  (if (.equals"-pt"(first *command-line-args*))
    (def SHOW_PARSE_TREE true)
    )
  
- (def parse-tree(parser stdin))
+ (def parse-tree (parser "print 1 + 4 - 3"))
+ (def interpreted (interpret-quirk parse-tree {}))
  
  ; if SHOW_PARSE_TREE = true, then print the parse tree
  (if(= true SHOW_PARSE_TREE)
    (println parse-tree)
-   ;(interpret-quirk parse-tree {}))
    )
+    (println interpreted)
  ) 
 
 

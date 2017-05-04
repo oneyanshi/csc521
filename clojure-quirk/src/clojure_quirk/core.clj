@@ -27,9 +27,9 @@
 
 ; <Program> --> <Statement> <Program> | <Statement> 
 (defn Program [subtree scope] 
-  (println "Program")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "Program")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   
   (cond(= 2 (count subtree))       
     ; Program1
@@ -44,105 +44,105 @@
 
 ; <Statement> -> <FunctionDeclaration> | <Assignment> | <Print> 
 (defn Statement [subtree scope] 
-  (println "Statement")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "Statement")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   (CallByLabel (first (second subtree)) (second subtree) scope)
   )
 
 
 ; <FunctionDeclaration> -> FUNCTION <Name> PAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
 (defn FunctionDeclaration [subtree scope] 
-  (println "FunctionDeclaration")
+  (ret-print "FunctionDeclaration")
   
   )
 
 ; <FunctionParams> -> <NameList> RPAREN | RPAREN 
 (defn FunctionParams [subtree scope]
-  (println "FunctionParams")
+  (ret-print "FunctionParams")
   
   )
 
 ; <FunctionBody> -> <Program> <Return> | <Return> 
 (defn FunctionBody [subtree scope]
-  (println "FunctionBody")
+  (ret-print "FunctionBody")
   )
 
 ; <Return> -> RETURN <ParameterList> 
 (defn Return [subtree scope]
-  (println "Return")
+  (ret-print "Return")
   )
 
 ; <Assignment> - <SingleAssignment> | <MultipleAssignment> 
 (defn Assignment [subtree scope]
-  (println "Assignment")
+  (ret-print "Assignment")
   ;(println subtree)
   ;(println (count subtree))
   ; Assignment0 and Assignment1
   (CallByLabel (first (second subtree)) (second subtree) scope)
+  
   )
   
 
 ; <SingleAssignment> -> VAR <Name> ASSIGN <Expression> 
 (defn SingleAssignment [subtree scope] 
-  (println "SingleaAssignment")
+  (ret-print "SingleAssignment")
   ;(println subtree)
   ;(println (count subtree))
-  
   ; SingleAssignment0 
   ; 1. Get the name of the variable 
   ; 2. Get the value of the <Expression> 
   ; 3. Bind name to value in scope. 
-  
-  
+  (assoc scope (CallByLabel (first(third subtree))(third subtree) scope) 
+         (CallByLabel(first(fifth subtree))(fifth subtree) scope))
   )
 
 ; <MultipleAssignment> -> VAR <NameList> ASSIGN <FunctionCall>
 (defn MultipleAssignment [subtree scope] 
-  (println "MultipleAssignment")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "MultipleAssignment")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   
   )
 
 ; <Print> -> PRINT <Expression> 
 (defn Print [subtree scope]
-  (println "Print") 
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "Print") 
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   (ret-print(CallByLabel (first (third subtree)) (third subtree) scope))
   )
 
 ; <NameList> -> <Name> COMMA <NameList> | <Name> 
 (defn NameList [subtree scope]
-  (println "NameList")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "NameList")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   
   )
 
 ; <ParameterList> -> <Parameter COMMA <ParameterList> | <Parameter> 
 (defn ParameterList [subtree scope]
-  (println "ParameterList")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "ParameterList")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   
   )
 
 ; <Parameter> -> <Expression> | <Name> 
 (defn Parameter [subtree scope] 
-  (println "Parameter")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "Parameter")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   (CallByLabel (first (second subtree)) (second subtree) scope)
   )
 
 
 ; <Expression> -> <Term> ADD <Expression> | <Term> SUB <Expression> | <Term> 
 (defn Expression [subtree scope]
-  (println "Expression")
-  ;(println subtree)
-	;(println (count subtree))
+  (ret-print "Expression")
+  ;(ret-print subtree)
+	;(ret-print (count subtree))
 	
 	(cond (= 2 (count subtree))
        (CallByLabel (first (second subtree)) (second subtree) scope)
@@ -156,9 +156,9 @@
 
 ; <Term> -> <Factor> MULT <Term> | <Factor> DIV <Term> | <Factor> 
 (defn Term [subtree scope]
-  (println "Term") 
-  ;(println subtree)
-  ;(println (count subtree)) 
+  (ret-print "Term") 
+  ;(ret-print subtree)
+  ;(ret-print (count subtree)) 
   
   (cond (= 2 (count subtree)) 
         (CallByLabel (first (second subtree)) (second subtree) scope) 
@@ -172,9 +172,9 @@
 
 ; <Factor> -> <SubExpression> EXP <Factor> | <SubExpression> | <FunctionCall> | <Value> EXP <Factor> | <Value> 
 (defn Factor [subtree scope] 
-  (println "Factor")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "Factor")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   
   (cond (= 2 (count subtree))
         (CallByLabel (first (second subtree)) (second subtree) scope) 
@@ -187,51 +187,62 @@
 
 ; <FunctionCall> -> <Name> LPAREN <FunctionCallParams> COLON <Number> | <Name> LPAREN <FunctionCallParams>
 (defn FunctionCall [subtree scope] 
-  (println "FunctionCall")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "FunctionCall")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
   
   )
 
 ; <FunctionCallParams> ->  <ParameterList> RPAREN | RPAREN
 ; QUESTION: do i need to check for the number of subtrees? 
 (defn FunctionCallParams [subtree scope]
-  (println "FunctionCallParams")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "FunctionCallParams")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
+  
+  
   
   )
 
 ; <SubExpression> -> LPAREN <Expression> RPAREN
 ; QUESTION: do i need to check for the number of subtrees? 
 (defn SubExpression [subtree scope]
-  (println "SubExpression")
-  ;(println subtree)
-  ;(println (count subtree))
+  (ret-print "SubExpression")
+  ;(ret-print subtree)
+  ;(ret-print (count subtree))
+  (CallByLabel(first(third subtree)) (third subtree) scope)
   
   )
 
 ; <Value> -> <Name> | <Number>
 (defn Value [subtree scope] 
-  (println "Value")
+  (ret-print "Value")
   ;(println subtree)
   ;(println (count subtree))
   ; Value0 and Value1
   (CallByLabel (first (second subtree)) (second subtree) scope) 
   )
 
-
 ; <Name> -> IDENT | SUB IDENT | ADD IDENT
 (defn Name [subtree scope]
-  (println "Name")
-  ;(println subtree)
-  ;(println (count subtree))
-  
+  ;(ret-print subtree) 
+  ;(ret-print (count subtree))
+  (ret-print "Name")
+  (cond
+    (= :IDENT (first(second subtree)))
+    (ret-print(get scope (second (second subtree))))
+    
+    (= :SUB (first(second subtree)))
+    (ret-print(* -1 (get scope(second (second subtree)))))
+    
+    (= :ADD (first(second subtree)))
+    (ret-print(+ (get scope(second (second subtree)))))
+    )
   )
 
 ; <Number> -> NUMBER | SUB NUMBER | ADD NUMBER
 (defn MyNumber [subtree scope]
-  (println "Number")
+  (ret-print "Number")
   ;(println subtree)
   ;(println (count subtree))
   ;(println(first (second subtree)) (second subtree))
@@ -267,14 +278,14 @@
 (defn -main [& args]
 
  ; takes in input
-; (def stdin (slurp *in*))
+ (def stdin (slurp *in*))
  
  ; is there a command for -pt? 
  (if (.equals"-pt"(first *command-line-args*))
    (def SHOW_PARSE_TREE true)
    )
  
- (def parse-tree (parser "print 1 + 4 - 3"))
+ (def parse-tree (parser stdin))
  (def interpreted (interpret-quirk parse-tree {}))
  
  ; if SHOW_PARSE_TREE = true, then print the parse tree
@@ -282,7 +293,7 @@
    (println parse-tree)
    ;(println interpreted)
    )
-    ;(println interpreted)
+    (println interpreted)
  ) 
 
 

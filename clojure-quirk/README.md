@@ -50,4 +50,9 @@ The parse tree will not be displayed but the interpreted result from the code wi
 ## Final Thoughts 
 :scream: :scream: :scream: :scream: 
 
-In all seriousness, this was an incredibly challenging assignment, and I'm proud of what I have been able to complete for learning a language on the fly and understanding the syntax and base code provided to us. What I would've changed was my own workflow, and while I may not get as far as my peers, I felt like I learned enough that I was able to help other people get to the point that I am at now as well through Piazza :pizza: .
+In all seriousness, this was an incredibly challenging assignment, and I'm proud of what I have been able to complete for learning a language on the fly and understanding the syntax and base code provided to us. While I may not get as far as my peers, I felt like I learned enough that I was able to help other people get to the point that I am at now as well through Piazza :pizza:.
+
+What would I have changed? I would have wanted a little more time to understand get to know Clojure. While I understand it at its conceptual level, I'd like to familiarize myself with the libraries that Clojure provides and the cool things that it could potentially do. Either way, I'm pleased with where I got in the project.
+
+
+

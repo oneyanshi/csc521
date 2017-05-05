@@ -21,7 +21,7 @@
 
 ; exponents 
 (defn ** [base power]
-  (reduce * (repeat base power)))
+  (reduce * (repeat power base)))
 
 ; end utility functions 
 
@@ -54,23 +54,38 @@
 ; <FunctionDeclaration> -> FUNCTION <Name> PAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
 (defn FunctionDeclaration [subtree scope] 
   (ret-print "FunctionDeclaration")
+  (ret-print subtree)
+  
   
   )
 
 ; <FunctionParams> -> <NameList> RPAREN | RPAREN 
 (defn FunctionParams [subtree scope]
   (ret-print "FunctionParams")
-  
+  (CallByLabel (first(second subtree)) (second subtree) scope) 
   )
 
 ; <FunctionBody> -> <Program> <Return> | <Return> 
 (defn FunctionBody [subtree scope]
   (ret-print "FunctionBody")
+  (cond(= 2 (count subtree))
+       ; FunctionBody1 
+    (CallByLabel (first (second subtree)) (second subtree) scope)
+    
+    ; FunctionBody0
+    (= :Program (first (third subtree)))
+    ((CallByLabel (first (second subtree)) (second subtree) scope)
+      (CallByLabel (first (third subtree)) (third subtree) scope))
+    
+    )
+  
   )
 
 ; <Return> -> RETURN <ParameterList> 
 (defn Return [subtree scope]
   (ret-print "Return")
+  ;(ret-print (subtree))
+  (CallByLabel (first(third subtree)) (third subtree) scope) 
   )
 
 ; <Assignment> - <SingleAssignment> | <MultipleAssignment> 
@@ -191,6 +206,8 @@
   ;(ret-print subtree)
   ;(ret-print (count subtree))
   
+  
+  
   )
 
 ; <FunctionCallParams> ->  <ParameterList> RPAREN | RPAREN
@@ -199,13 +216,11 @@
   (ret-print "FunctionCallParams")
   ;(ret-print subtree)
   ;(ret-print (count subtree))
-  
-  
+  (CallByLabel(first(second subtree)) (second subtree) scope)
   
   )
 
 ; <SubExpression> -> LPAREN <Expression> RPAREN
-; QUESTION: do i need to check for the number of subtrees? 
 (defn SubExpression [subtree scope]
   (ret-print "SubExpression")
   ;(ret-print subtree)

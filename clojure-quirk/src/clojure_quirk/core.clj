@@ -54,9 +54,11 @@
 ; <FunctionDeclaration> -> FUNCTION <Name> PAREN <FunctionParams> LBRACE <FunctionBody> RBRACE
 (defn FunctionDeclaration [subtree scope] 
   (ret-print "FunctionDeclaration")
-  (ret-print subtree)
-  
-  
+  ; (ret-print subtree)
+  (assoc scope (CallByLabel (first(third subtree))(third subtree) scope) 
+       (CallByLabel(first(fifth subtree))(fifth subtree) scope) 
+       (CallByLabel(first(sixth subtree) (sixth subtree) scope))
+       )
   )
 
 ; <FunctionParams> -> <NameList> RPAREN | RPAREN 
@@ -76,9 +78,7 @@
     (= :Program (first (third subtree)))
     ((CallByLabel (first (second subtree)) (second subtree) scope)
       (CallByLabel (first (third subtree)) (third subtree) scope))
-    
     )
-  
   )
 
 ; <Return> -> RETURN <ParameterList> 
@@ -95,7 +95,6 @@
   ;(println (count subtree))
   ; Assignment0 and Assignment1
   (CallByLabel (first (second subtree)) (second subtree) scope)
-  
   )
   
 
@@ -306,9 +305,10 @@
  ; if SHOW_PARSE_TREE = true, then print the parse tree
  (if(= true SHOW_PARSE_TREE)
    (println parse-tree)
-   ;(println interpreted)
    )
-    (println interpreted)
+ 
+ :else
+ (println interpreted)
  ) 
 
 

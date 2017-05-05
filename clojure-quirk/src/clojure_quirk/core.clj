@@ -305,11 +305,13 @@
  ; if SHOW_PARSE_TREE = true, then print the parse tree
  (if(= true SHOW_PARSE_TREE)
    (println parse-tree)
+   (println interpreted)
    )
  
- :else
- (println interpreted)
- ) 
+ ; if SHOW_PARSE TREE = false, then just go for the interpretation 
+ (if(= false SHOW_PARSE_TREE)
+ (println interpreted))
+) 
 
 
 

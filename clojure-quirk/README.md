@@ -15,7 +15,7 @@ A parser and interpreter written in Clojure for an imaginary grammar/language ca
 
 ## Usage
 
-You must have an environment where you are able to run leiningen. If you cannot run leiningen, go [here for more information](https://leiningen.org/) on how to install it, etc. Recommended to use Eclipse and download Counterclockwise in order to use write in Clojure within Eclipse. There are other ways to get this environment in text editors like Atom, Sublime, etc., and other programs like IntelliJ. I personally used Eclipse and Counterclockwise and was pretty pleased with the flow that it provided. 
+You must have an environment where you are able to run leiningen. If you cannot run leiningen, go [here for more information](https://leiningen.org/) on how to install it, etc. Recommended that you use Eclipse and download Counterclockwise in order to use write in Clojure within Eclipse. There are other ways to get this environment in text editors like Atom, Sublime, etc., and other programs like IntelliJ. I personally used Eclipse and Counterclockwise and was pretty pleased with the flow that it provided. 
 
 If you already have leiningen, please follow these directions within your terminal/command prompt. 
 
@@ -33,11 +33,21 @@ In order to read this quirk grammar file, don't forget to use slurp!
 
 If you'd like to see the parse tree within terminal, type the following commands: 
 
-`lein run -pt<[filename.q]` 
+`lein run -pt <[foldername/filename.q]` 
 
 and a parse tree will happen! :sparkles: 
 
 ## Interpreter 
 
+Currently, the interpreter evaluates up to example 2. 
+
+The interpreter is very similar to the python interpreter located in the `python-quirk` folder. I used the python interpreter as a template in order to write the Clojure version. It uses the output from the parser in order to interpret and provide results. As per requirements, in order to run code, omit the `-pt` flag and write in terminal: 
+
+`lein run < [filename.q]` 
+
+The parse tree will not be displayed but the interpreted result from the code will be, assuming that there are no errors! 
+
 ## Final Thoughts 
 :scream: :scream: :scream: :scream: 
+
+In all seriousness, this was an incredibly challenging assignment, and I'm proud of what I have been able to complete for learning a language on the fly and understanding the syntax and base code provided to us. What I would've changed was my own workflow, and while I may not get as far as my peers, I felt like I learned enough that I was able to help other people get to the point that I am at now as well through Piazza :pizza: .

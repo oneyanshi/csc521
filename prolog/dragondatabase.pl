@@ -4,7 +4,10 @@
  * that are related to that type, e.g. Eurodragons or have
  * a particular characteristic e.g. wings.
  *
+ * Queries near the end do not have the same number of arguments.
+ *
  */
+
 
 dragon. fae. salamander. wyrm. quetzakcoatl.
 amphithere. lindworm. lungDragon. drake. hydra.

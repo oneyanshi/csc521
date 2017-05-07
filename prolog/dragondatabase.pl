@@ -1,48 +1,60 @@
+/*
+ * Prolog for a dragon phylogeny tree
+ * Queries related to dragons could return either dragons
+ * that are related to that type, e.g. Eurodragons or have
+ * a particular characteristic e.g. wings.
+ *
+ */
+
 dragon. fae. salamander. wyrm. quetzakcoatl.
 amphithere. lindworm. lungDragon. drake. hydra.
 wyvern. cockatrice. kirin. seaSerpent.
 
 
-eurodragon(dragon).
-eurodragon(fae). 
-sizeReduct(fae). 
-draganid(salamander).
-draganid(X) :- eurodragon(X).
 
-drakoid(wyvern).
-drakoid(drake).
-drakoid(hydra).
+isEurodragon(dragon).
+isEurodragon(fae).
+isDraganid(salamander).
+isDraganid(X) :- eurodragon(X).
 
-drakid(X) :- serpentoid(X); drakoid(X).
+isDrakoid(wyvern).
+isDrakoid(drake).
+isDrakoid(hydra).
 
-trueSerpent(wyvern).
-trueSerpent(quetzakcoatl).
-brachioserpent(amphithere).
-brachioserpent(lindworm). 
-serpentoid(lungDragon).
-serpentoid(X) :- trueSerpent(X); brachioserpent(X).
+isDrakid(X) :- serpentoid(X); drakoid(X).
 
-bird(cockatrice).
+isTrueSerpent(wyvern).
+isTrueSerpent(quetzakcoatl).
+isBrachioserpent(amphithere).
+isBrachioserpent(lindworm).
+isSerpentoid(lungDragon).
+isSerpentoid(X) :- trueSerpent(X); brachioserpent(X).
 
-mammal(kirin).
+isBird(cockatrice).
 
-rayFinnedFish(seaSerpent). 
+isMammal(kirin).
 
-fourLegs(X) :- mammal(X) ; bird(X) ; drakid(X) ; draganid(X).
+isRayFinnedFish(seaSerpent).
 
-wings(dragon).
-wings(amphithere).
-wings(wyvernn).
-wings(X) :- bird(X).
+hasFourLegs(X) :- mammal(X) ; bird(X) ; drakid(X) ; draganid(X).
 
-feathers(quetzakcoatl). 
-feathers(X) :- bird(X).
+hasWings(dragon).
+hasWings(amphithere).
+hasWings(wyvernn).
+hasWings(X) :- bird(X).
 
-elongatedBody(salamander). 
-elongatedBody(X) :- serpentoid(X); rayFinnedFish(X).
-fur(X) :- mammal(X). 
-appendagesLost(X) :- trueSerpent(X) ; brachioserpent(X).
-extraAppendages(X) :- draganid(X). 
+hasFeathers(quetzakcoatl).
+hasFeathers(X) :- bird(X).
 
+hasElongatedBody(salamander).
+hasElongatedBody(X) :- serpentoid(X); rayFinnedFish(X).
 
+hasFur(X) :- mammal(X).
 
+hasAppendagesLost(X) :- trueSerpent(X) ; brachioserpent(X).
+
+hasExtraAppendages(X) :- draganid(X).
+
+hasSizeReduct(fae).
+
+dragon(eurodragon, wings).
